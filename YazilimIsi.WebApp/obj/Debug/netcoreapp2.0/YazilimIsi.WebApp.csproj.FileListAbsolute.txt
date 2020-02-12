@@ -1,0 +1,11 @@
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.WebApp.deps.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.WebApp.runtimeconfig.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.WebApp.runtimeconfig.dev.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.WebApp.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.WebApp.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.csprojAssemblyReference.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.csproj.CoreCompileInputs.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.AssemblyInfoInputs.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.AssemblyInfo.cs
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.pdb

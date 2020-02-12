@@ -1,0 +1,11 @@
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.deps.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\obj\Debug\netcoreapp2.0\YazilimIsi.Entity.csprojAssemblyReference.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\obj\Debug\netcoreapp2.0\YazilimIsi.Entity.csproj.CoreCompileInputs.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\obj\Debug\netcoreapp2.0\YazilimIsi.Entity.AssemblyInfoInputs.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\obj\Debug\netcoreapp2.0\YazilimIsi.Entity.AssemblyInfo.cs
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\obj\Debug\netcoreapp2.0\YazilimIsi.Entity.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\obj\Debug\netcoreapp2.0\YazilimIsi.Entity.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.runtimeconfig.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Entity\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.runtimeconfig.dev.json
