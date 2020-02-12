@@ -1,7 +1,6 @@
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\bin\Debug\netcoreapp2.0\YazilimIsi.Business.deps.json
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\bin\Debug\netcoreapp2.0\YazilimIsi.Business.dll
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\bin\Debug\netcoreapp2.0\YazilimIsi.Business.pdb
-D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\obj\Debug\netcoreapp2.0\YazilimIsi.Business.csprojAssemblyReference.cache
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\obj\Debug\netcoreapp2.0\YazilimIsi.Business.csproj.CoreCompileInputs.cache
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\obj\Debug\netcoreapp2.0\YazilimIsi.Business.AssemblyInfoInputs.cache
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\obj\Debug\netcoreapp2.0\YazilimIsi.Business.AssemblyInfo.cs
