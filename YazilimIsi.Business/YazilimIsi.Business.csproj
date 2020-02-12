@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\YazilimIsi.DataAccess\YazilimIsi.DataAccess.csproj" />
+    <ProjectReference Include="..\YazilimIsi.Entity\YazilimIsi.Entity.csproj" />
+  </ItemGroup>
+
 </Project>

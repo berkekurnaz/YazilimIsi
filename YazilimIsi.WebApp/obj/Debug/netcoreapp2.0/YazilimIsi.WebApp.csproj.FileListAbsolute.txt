@@ -8,3 +8,4 @@ D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\Yaz
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.AssemblyInfo.cs
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.dll
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.csprojAssemblyReference.cache
