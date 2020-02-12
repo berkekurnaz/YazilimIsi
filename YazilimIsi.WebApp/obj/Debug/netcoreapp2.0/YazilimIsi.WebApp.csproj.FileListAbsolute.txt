@@ -9,3 +9,10 @@ D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\Yaz
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.dll
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.pdb
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.csprojAssemblyReference.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\obj\Debug\netcoreapp2.0\YazilimIsi.WebApp.csproj.CopyComplete
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.Business.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.DataAccess.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.Business.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.DataAccess.pdb
