@@ -1,10 +1,24 @@
 ﻿
+@using Microsoft.AspNetCore.Http
 @{
     Layout = null;
 }
 
-<!DOCTYPE html>
+@{
+    string developerId = "";
+    string userId = "";
+    if (Context.Session.GetString("SessionDeveloperId") != null)
+    {
+        developerId = Context.Session.GetString("SessionDeveloperId");
+    }
+    if (Context.Session.GetString("SessionUserId") != null)
+    {
+        userId = Context.Session.GetString("SessionUserId");
+    }
 
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -74,16 +88,46 @@
                                     </nav>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
-                                <div class="Appointment">
-                                    <div class="phone_num d-none d-xl-block">
-                                        <a href="/Uye/UyeOl/">Üye Ol</a>
-                                    </div>
-                                    <div class="d-none d-lg-block">
-                                        <a class="boxed-btn3" href="/Uye/Giris/">Giriş Yap</a>
+                            @if (developerId.Length != 0)
+                            {
+                                <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                    <div class="Appointment">
+                                        <div class="phone_num d-none d-xl-block">
+                                            <a href="/Uye/Cikis/">Çıkış Yap</a>
+                                        </div>
+                                        <div class="d-none d-lg-block">
+                                            <a class="boxed-btn3" href="/Uye/YazilimciProfil/">Profilim</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+                            else if (userId.Length != 0)
+                            {
+                                <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                    <div class="Appointment">
+                                        <div class="phone_num d-none d-xl-block">
+                                            <a href="/Uye/Cikis/">Çıkış Yap</a>
+                                        </div>
+                                        <div class="d-none d-lg-block">
+                                            <a class="boxed-btn3" href="/Uye/UyeProfil/">Profilim</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                    <div class="Appointment">
+                                        <div class="phone_num d-none d-xl-block">
+                                            <a href="/Uye/UyeOl/">Üye Ol</a>
+                                        </div>
+                                        <div class="d-none d-lg-block">
+                                            <a class="boxed-btn3" href="/Uye/Giris/">Giriş Yap</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
                             <div class="col-12">
                                 <div class="mobile_menu d-block d-lg-none"></div>
                             </div>

@@ -20,13 +20,25 @@ namespace YazilimIsi.WebApp.Controllers
         /* Yazilimci Profil Sayfasi */
         public IActionResult YazilimciProfil()
         {
-            return View();
+            int developerId;
+            if (HttpContext.Session.GetString("SessionDeveloperId") == null)
+            {
+                return RedirectToAction("Index", "Anasayfa");
+            }
+            developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            return View(_developerService.GetDeveloperById(developerId));
         }
 
         /* IsVeren Profil Sayfasi */
         public IActionResult UyeProfil()
         {
-            return View();
+            int userId;
+            if (HttpContext.Session.GetString("SessionUserId") == null)
+            {
+                return RedirectToAction("Index", "Anasayfa");
+            }
+            userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            return View(_userService.GetUserById(userId));
         }
 
         /* Uyeler Icin Giris Sayfasi */
@@ -55,7 +67,8 @@ namespace YazilimIsi.WebApp.Controllers
                 TempData["LogInErrorMessage"] = "Kullanıcı Adını Veya Şifreyi Hatalı Girdiniz";
                 return View();
             }
-            HttpContext.Session.SetString("SessionDeveloperId", developer.Id.ToString());
+            var developerId = _developerService.GetAllDevelopers().Where(x => x.Username == developer.Username && x.Password == developer.Password).SingleOrDefault().Id;
+            HttpContext.Session.SetString("SessionDeveloperId", developerId.ToString());
             return RedirectToAction("UyeProfil");
         }
 
@@ -72,7 +85,8 @@ namespace YazilimIsi.WebApp.Controllers
                 TempData["LogInErrorMessage"] = "Kullanıcı Adını Veya Şifreyi Hatalı Girdiniz";
                 return View();
             }
-            HttpContext.Session.SetString("SessionUserId", user.Id.ToString());
+            var userId = _userService.GetAllUsers().Where(x => x.Username == user.Username && x.Password == user.Password).SingleOrDefault().Id;
+            HttpContext.Session.SetString("SessionUserId", userId.ToString());
             return RedirectToAction("YazilimciProfil");
         }
 
@@ -140,6 +154,13 @@ namespace YazilimIsi.WebApp.Controllers
         public IActionResult UyelikBasari()
         {
             return View();
+        }
+
+        /* Uye Cikis Islemi */
+        public IActionResult Cikis()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index","Anasayfa");
         }
 
     }
