@@ -12,5 +12,10 @@ namespace YazilimIsi.Business.Abstract
         void Add(User user);
         void Update(User user);
         void Delete(User user);
+
+        bool UserUsernameCheck(string username);
+        bool UserMailCheck(string mail);
+
+        bool UserLoginCheck(string username, string password);
     }
 }

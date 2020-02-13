@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using YazilimIsi.Entity.Models;
 
 namespace YazilimIsi.WebApp
@@ -25,8 +27,13 @@ namespace YazilimIsi.WebApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            IFileProvider physicalProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory());
+
             services.AddDbContext<DbYazilimIsiContext>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<IFileProvider>(physicalProvider);
+            services.AddSession();
             services.AddMvc();
         }
 
@@ -37,6 +44,7 @@ namespace YazilimIsi.WebApp
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

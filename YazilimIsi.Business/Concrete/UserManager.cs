@@ -46,5 +46,38 @@ namespace YazilimIsi.Business.Concrete
         {
             _userDal.Update(user);
         }
+
+        public bool UserLoginCheck(string username, string password)
+        {
+            bool loginSuccess = true;
+            var user = _userDal.GetAll(x => x.Username == username && x.Password == password).Count;
+            if (user == 0)
+            {
+                loginSuccess = false;
+            }
+            return loginSuccess;
+        }
+
+        public bool UserMailCheck(string mail)
+        {
+            bool state = true; // True olarak donerse durum temiz, mail kullanilmiyor.
+            var usersCount = _userDal.GetAll(x => x.Mail == mail).Count;
+            if (usersCount > 0)
+            {
+                state = false;
+            }
+            return state;
+        }
+
+        public bool UserUsernameCheck(string username)
+        {
+            bool state = true; // True olarak donerse durum temiz, mail kullanilmiyor.
+            var usersCount = _userDal.GetAll(x => x.Username == username).Count;
+            if (usersCount > 0)
+            {
+                state = false;
+            }
+            return state;
+        }
     }
 }

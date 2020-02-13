@@ -3,16 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YazilimIsi.Entity", "YazilimIsi.Entity\YazilimIsi.Entity.csproj", "{0ADB8386-105B-49DE-AFAF-D889417BF61F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YazilimIsi.Entity", "YazilimIsi.Entity\YazilimIsi.Entity.csproj", "{0ADB8386-105B-49DE-AFAF-D889417BF61F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YazilimIsi.DataAccess", "YazilimIsi.DataAccess\YazilimIsi.DataAccess.csproj", "{6C9BAB0E-A99B-429F-A6A8-4167E76EE61A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YazilimIsi.DataAccess", "YazilimIsi.DataAccess\YazilimIsi.DataAccess.csproj", "{6C9BAB0E-A99B-429F-A6A8-4167E76EE61A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YazilimIsi.Business", "YazilimIsi.Business\YazilimIsi.Business.csproj", "{F255101B-1D47-41C2-A0AA-82361FA790CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YazilimIsi.Business", "YazilimIsi.Business\YazilimIsi.Business.csproj", "{F255101B-1D47-41C2-A0AA-82361FA790CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YazilimIsi.WebApp", "YazilimIsi.WebApp\YazilimIsi.WebApp.csproj", "{0DC5695D-8725-4B7E-87ED-DC356EB5B2C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YazilimIsi.WebApp", "YazilimIsi.WebApp\YazilimIsi.WebApp.csproj", "{0DC5695D-8725-4B7E-87ED-DC356EB5B2C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{49533474-3988-4C9D-8A9A-B307C824D84E}"
 	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
 		README.md = README.md
 	EndProjectSection
 EndProject

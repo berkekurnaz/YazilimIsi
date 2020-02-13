@@ -1,0 +1,61 @@
+﻿@model YazilimIsi.Entity.Models.Developer
+@{
+    ViewData["Title"] = "YazilimciUyeOl";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Yazılımcı Üye Ol</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="col-md-8 text-center mx-auto">
+
+            @if (TempData["SignInErrorMessage"] != null)
+            {
+                <blockquote class="generic-blockquote">@TempData["SignInErrorMessage"]</blockquote>
+            }
+
+            <h3>Yazılımcılar İçin Üyelik</h3>
+            <hr />
+            <form asp-controller="Uye" asp-action="YazilimciUyeOl" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input asp-for="Username" type="text" class="form-control" placeholder="Kullanıcı Adını Giriniz..." required>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Mail" type="email" class="form-control" placeholder="Mail Adresiniz Giriniz..." required>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Name" type="text" class="form-control" placeholder="Adınızı Giriniz..." required>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Surname" type="text" class="form-control" placeholder="Soyadınızı Giriniz..." required>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Phone" type="text" class="form-control" placeholder="Telefon Numaranızı Giriniz..." required>
+                </div>
+                <div class="form-group">
+                    <textarea asp-for="Address" class="form-control" placeholder="Adresinizi Giriniz..." rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Şifrenizi Giriniz..." required>
+                </div>
+                <button type="submit" class="boxed-btn3">Yazılımcı Üyeliği Oluştur</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

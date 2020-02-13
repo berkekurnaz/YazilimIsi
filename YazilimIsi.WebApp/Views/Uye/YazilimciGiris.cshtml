@@ -1,0 +1,46 @@
+﻿@model YazilimIsi.Entity.Models.Developer
+@{
+    ViewData["Title"] = "YazilimciGiris";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Yazılımcı Giriş</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="col-md-8 text-center mx-auto">
+
+            @if (TempData["LogInErrorMessage"] != null)
+            {
+                <blockquote class="generic-blockquote">@TempData["LogInErrorMessage"]</blockquote>
+            }
+
+            <h3>Yazılımcılar İçin Giriş</h3>
+            <hr />
+            <form asp-controller="Uye" asp-action="YazilimciGiris" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input asp-for="Username" type="text" class="form-control" placeholder="Kullanıcı Adını Giriniz..." required>
+                </div>
+                <div class="form-group">
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Şifrenizi Giriniz..." required>
+                </div>
+                <button type="submit" class="boxed-btn3">Yazılımcı Girişi Yap</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

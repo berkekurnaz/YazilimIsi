@@ -12,5 +12,10 @@ namespace YazilimIsi.Business.Abstract
         void Add(Developer developer);
         void Update(Developer developer);
         void Delete(Developer developer);
+
+        bool DeveloperUsernameCheck(string username);
+        bool DeveloperMailCheck(string mail);
+
+        bool DeveloperLoginCheck(string username, string password);
     }
 }
