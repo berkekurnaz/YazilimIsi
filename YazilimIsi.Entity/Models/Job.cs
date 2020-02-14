@@ -5,12 +5,18 @@ namespace YazilimIsi.Entity.Models
 {
     public partial class Job
     {
+        public Job()
+        {
+            Offer = new HashSet<Offer>();
+        }
+
         public int Id { get; set; }
         public string Title { get; set; }
         public string Location { get; set; }
         public string Photo { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public string Price { get; set; }
+        public long? Price { get; set; }
+        public int? Time { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
         public string ViewCount { get; set; }
@@ -20,7 +26,8 @@ namespace YazilimIsi.Entity.Models
         public bool? IsCompleted { get; set; }
         public DateTime? UpdateDate { get; set; }
 
-        public Developer Developer { get; set; }
-        public User User { get; set; }
+        public virtual Developer Developer { get; set; }
+        public virtual User User { get; set; }
+        public virtual ICollection<Offer> Offer { get; set; }
     }
 }

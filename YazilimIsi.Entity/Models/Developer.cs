@@ -7,7 +7,11 @@ namespace YazilimIsi.Entity.Models
     {
         public Developer()
         {
+            Award = new HashSet<Award>();
+            Education = new HashSet<Education>();
             JobNavigation = new HashSet<Job>();
+            Offer = new HashSet<Offer>();
+            Portfolio = new HashSet<Portfolio>();
         }
 
         public int Id { get; set; }
@@ -31,7 +35,13 @@ namespace YazilimIsi.Entity.Models
         public string Password { get; set; }
         public bool? IsConfirm { get; set; }
         public string Money { get; set; }
+        public string DeveloperAreas { get; set; }
+        public string DeveloperSkills { get; set; }
 
-        public ICollection<Job> JobNavigation { get; set; }
+        public virtual ICollection<Award> Award { get; set; }
+        public virtual ICollection<Education> Education { get; set; }
+        public virtual ICollection<Job> JobNavigation { get; set; }
+        public virtual ICollection<Offer> Offer { get; set; }
+        public virtual ICollection<Portfolio> Portfolio { get; set; }
     }
 }

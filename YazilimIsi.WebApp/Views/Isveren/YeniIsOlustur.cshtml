@@ -1,0 +1,131 @@
+﻿@model YazilimIsi.Entity.Models.Job
+
+@{
+    ViewData["Title"] = "YeniIsOlustur";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>İşveren Yeni İş Oluşturma Ekranı</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container text-center">
+
+        <form asp-controller="Isveren" asp-action="YeniIsOlustur" method="post" enctype="multipart/form-data">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Yeni İş Oluşturma Ekranına Hoşgeldin</h5>
+                    <hr />
+                    <p class="card-text">Projen İle İlgili Detay Verirken Lütfen Bütün Alanları Doldurmaya Çalış. Aksi Takdirde Verdiğin İlan Onaylanmayacaktır.</p>
+                    <p class="card-text">Onaylanmayan İlanlardan Sonra Hesabınızdan Kesilen 1 TL Hesabınıza Tekrar Geri Yüklenir.</p>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Proje Genel Bilgileri</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <input type="text" asp-for="Title" class="form-control" placeholder="Proje Başlığını Giriniz..." required>
+                        <small>* Lütfen Proje Başlığı Belirtirken Açıklayıcı Ve Kısa Olmaya Çalışın.</small>
+                    </div>
+                    <div class="form-group col-md-8 mx-auto">
+                        <input type="text" asp-for="Location" class="form-control" placeholder="Proje Konumunu Giriniz..." required>
+                        <small>* Projenizin Şehir, Semt Veya Mahalle Gibi Konum Bilgilerini Girebilirsiniz.</small>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Proje Zaman-Fiyat Bilgileri</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <input type="number" asp-for="Price" class="form-control" placeholder="Proje İçin Bütçenizi Giriniz..." required>
+                        <small>* Proje İçin Harcamayı Düşündüğünüz Bütçeyi Bu Alanda Belirtiniz.</small>
+                    </div>
+                    <div class="form-group col-md-8 mx-auto">
+                        <input type="number" asp-for="Time" class="form-control" placeholder="Proje İçin İstediğiniz Süreyi Giriniz..." required>
+                        <small>* Projeyi Kaç Gün İçerisinde Teslim Almak İstiyorsanız Bu Alanda Belirtebilirsiniz.</small>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Proje Kategori Seçimi</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <select asp-for="Category">
+                            <option>Tüm Yazılım Kategorisi</option>
+                            <option>Frontend Yazılım</option>
+                            <option>Backend Yazılım</option>
+                            <option>Full Stack Yazılım</option>
+                            <option>Mobil Uygulama Geliştirme</option>
+                            <option>Masaüstü Uygulama Geliştirme</option>
+                            <option>Gömülü Sistem Yazılımı</option>
+                            <option>Veritabanı Programcılığı</option>
+                            <option>Oyun Geliştirme</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Proje Küçük Fotoğrafı</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <input type="file" asp-for="Photo" class="form-control-file" required>
+                        <small>* Lütfen Projeye Ait Yan Tarafta Gözükecek Olan Küçük Fotoğrafı Yükleyiniz.</small>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Proje Açıklama Yazısı</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <small>* Lütfen İstediğiniz Proje İle İlgili Detaylı Ve Açıklayıcı Bir Tanıtım Yazısı Giriniz</small>
+                        <textarea asp-for="Description" class="form-control" placeholder="Proje Tanıtım Yazısını Giriniz..." rows="8" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Proje İşlemler</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <br />
+                        <button type="submit" class="genric-btn info">İlanı Oluştur Ve Onaya Gönder</button>
+                        <br /><br />
+                        <small>* İlan Onaylandıktan Sonra Mail Adresinize Bilgi Mesajı Gönderilecektir.</small>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+        </form>
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->
