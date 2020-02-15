@@ -8,6 +8,8 @@ namespace YazilimIsi.Business.Abstract
     public interface IJobService
     {
         List<Job> GetAllJobs();
+        List<Job> GetJobsByUserId(int userId);
+
         Job GetJobById(int Id);
         void Add(Job job);
         void Update(Job job);

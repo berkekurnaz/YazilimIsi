@@ -1,4 +1,4 @@
-﻿@model YazilimIsi.Entity.Models.User
+﻿@model YazilimIsi.WebApp.Models.UserViewModels
 @{
     ViewData["Title"] = "UyeProfil";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div classNedir="bradcam_text">
-                    <h3>Hoşgeldin : <span>@Model.Name</span> <span>@Model.Surname</span></h3>
+                    <h3>Hoşgeldin : <span>@Model.User.Name</span> <span>@Model.User.Surname</span></h3>
                 </div>
             </div>
         </div>
@@ -22,6 +22,12 @@
     <div class="container">
 
         <div class="row text-center">
+
+            @if (TempData["AddSuccessMessage"] != null)
+            {
+                <blockquote class="generic-blockquote">@TempData["AddSuccessMessage"]</blockquote>
+            }
+
             <div class="col-md-4">
 
                 <!-- Uye Profil Fotografi -->
@@ -42,7 +48,7 @@
                         <h3>Bakiye</h3>
                         <hr />
 
-                        <p>2.00 TL</p>
+                        <p>@Model.User.Money TL</p>
 
                         <a href="#" class="genric-btn info-border">Para Yükleme</a> <br /><br />
                         <a href="#" class="genric-btn info-border">Hesap Hareketlerini İncele</a>
@@ -97,19 +103,19 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h3>Oluşturduğunuz İş Başlıkları</h3>
+                        <h3>Oluşturduğunuz İşler</h3>
                         <hr />
-
-                        <a href="">C# Masaüstü Kafe Otomasyonu</a><br />
-                        <a href="">C# Masaüstü Kafe Otomasyonu</a><br />
-                        <a href="">C# Masaüstü Kafe Otomasyonu</a><br />
+                        @foreach (var item in Model.UserJobs)
+                        {
+                        <a href="/Isveren/IsDetay/@item.Id">@item.Title - @Convert.ToDateTime(item.CreatedDate).ToShortDateString() </a><br />
+                        }
                         <br />
-                        <a href="#" class="genric-btn info-border">Tamamını Görüntüle</a>
+                        <a href="/Isveren/Isler" class="genric-btn info-border">Tamamını Görüntüle</a>
 
                     </div>
                 </div>
                 <br />
-                <!-- PORTFOLYO -->
+                <!-- ISTATISTIKLER -->
                 <div class="card">
                     <div class="card-body">
 

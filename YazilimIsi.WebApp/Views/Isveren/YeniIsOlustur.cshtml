@@ -22,6 +22,11 @@
 <div class="featured_candidates_area candidate_page_padding">
     <div class="container text-center">
 
+        @if (TempData["AddErrorMessage"] != null)
+        {
+            <blockquote class="generic-blockquote">@TempData["AddErrorMessage"]</blockquote>
+        }
+
         <form asp-controller="Isveren" asp-action="YeniIsOlustur" method="post" enctype="multipart/form-data">
 
             <div class="card">

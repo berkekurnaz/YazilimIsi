@@ -37,6 +37,11 @@ namespace YazilimIsi.Business.Concrete
             return _jobDal.Get(x => x.Id == Id);
         }
 
+        public List<Job> GetJobsByUserId(int userId)
+        {
+            return _jobDal.GetAll(x => x.UserId == userId);
+        }
+
         public void Update(Job job)
         {
             _jobDal.Update(job);

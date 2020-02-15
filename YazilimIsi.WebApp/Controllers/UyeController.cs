@@ -8,6 +8,7 @@ using YazilimIsi.Business.Abstract;
 using YazilimIsi.Business.Concrete;
 using YazilimIsi.DataAccess.Concrete;
 using YazilimIsi.Entity.Models;
+using YazilimIsi.WebApp.Models;
 
 namespace YazilimIsi.WebApp.Controllers
 {
@@ -16,6 +17,7 @@ namespace YazilimIsi.WebApp.Controllers
 
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
         IUserService _userService = new UserManager(new EfUserDal());
+        IJobService _jobService = new JobManager(new EfJobDal());
 
         /* Yazilimci Profil Sayfasi */
         public IActionResult YazilimciProfil()
@@ -26,6 +28,7 @@ namespace YazilimIsi.WebApp.Controllers
                 return RedirectToAction("Index", "Anasayfa");
             }
             developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+
             return View(_developerService.GetDeveloperById(developerId));
         }
 
@@ -38,7 +41,12 @@ namespace YazilimIsi.WebApp.Controllers
                 return RedirectToAction("Index", "Anasayfa");
             }
             userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
-            return View(_userService.GetUserById(userId));
+
+            UserViewModels userViewModels = new UserViewModels();
+            userViewModels.User = _userService.GetUserById(userId);
+            userViewModels.UserJobs = _jobService.GetJobsByUserId(userId);
+
+            return View(userViewModels);
         }
 
         /* Uyeler Icin Giris Sayfasi */
@@ -161,6 +169,12 @@ namespace YazilimIsi.WebApp.Controllers
         {
             HttpContext.Session.Clear();
             return RedirectToAction("Index","Anasayfa");
+        }
+
+        /* Hata Sayfası */
+        public IActionResult Hata()
+        {
+            return View();
         }
 
     }
