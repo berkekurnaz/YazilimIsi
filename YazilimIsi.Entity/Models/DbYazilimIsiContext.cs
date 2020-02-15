@@ -15,6 +15,7 @@ namespace YazilimIsi.Entity.Models
         {
         }
 
+        public virtual DbSet<AccountActivity> AccountActivity { get; set; }
         public virtual DbSet<Award> Award { get; set; }
         public virtual DbSet<Blog> Blog { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
@@ -31,13 +32,33 @@ namespace YazilimIsi.Entity.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-DF3RRQ5;Database=DbYazilimIsi;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-DF3RRQ5;Database=DbYazilimIsi;Trusted_Connection=True;MultipleActiveResultSets=true");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<AccountActivity>(entity =>
+            {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Description).HasMaxLength(250);
+
+                entity.Property(e => e.Money).HasMaxLength(50);
+
+                entity.Property(e => e.Title).HasMaxLength(250);
+
+                entity.HasOne(d => d.Developer)
+                    .WithMany(p => p.AccountActivity)
+                    .HasForeignKey(d => d.DeveloperId)
+                    .HasConstraintName("FK_AccountActivity_Developer");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AccountActivity)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("FK_AccountActivity_Job");
+            });
+
             modelBuilder.Entity<Award>(entity =>
             {
                 entity.Property(e => e.Date).HasColumnType("datetime");

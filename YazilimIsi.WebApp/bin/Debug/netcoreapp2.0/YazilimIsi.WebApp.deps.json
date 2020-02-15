@@ -27,7 +27,8 @@
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
           "YazilimIsi.Business": "1.0.0",
-          "YazilimIsi.Entity": "1.0.0"
+          "YazilimIsi.Entity": "1.0.0",
+          "YazilimIsi.HelperFileUploader": "1.0.0"
         },
         "runtime": {
           "YazilimIsi.WebApp.dll": {}
@@ -4202,6 +4203,9 @@
       },
       "YazilimIsi.Business/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "3.1.1",
+          "Microsoft.EntityFrameworkCore.Design": "3.1.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.1",
           "YazilimIsi.DataAccess": "1.0.0",
           "YazilimIsi.Entity": "1.0.0"
         },
@@ -4214,6 +4218,9 @@
       },
       "YazilimIsi.DataAccess/1.0.0": {
         "dependencies": {
+          "Microsoft.EntityFrameworkCore": "3.1.1",
+          "Microsoft.EntityFrameworkCore.Design": "3.1.1",
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.1",
           "YazilimIsi.Entity": "1.0.0"
         },
         "runtime": {
@@ -4234,6 +4241,14 @@
         },
         "compile": {
           "YazilimIsi.Entity.dll": {}
+        }
+      },
+      "YazilimIsi.HelperFileUploader/1.0.0": {
+        "runtime": {
+          "YazilimIsi.HelperFileUploader.dll": {}
+        },
+        "compile": {
+          "YazilimIsi.HelperFileUploader.dll": {}
         }
       },
       "Microsoft.NETCore.App/2.0.0": {
@@ -6611,6 +6626,11 @@
       "sha512": ""
     },
     "YazilimIsi.Entity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "YazilimIsi.HelperFileUploader/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

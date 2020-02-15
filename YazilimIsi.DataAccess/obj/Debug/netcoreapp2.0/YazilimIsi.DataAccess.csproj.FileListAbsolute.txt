@@ -10,3 +10,5 @@ D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.DataAccess\obj\Debug\netcoreapp2.0
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.DataAccess\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.dll
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.DataAccess\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.pdb
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.DataAccess\obj\Debug\netcoreapp2.0\YazilimIsi.DataAccess.csproj.CopyComplete
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.DataAccess\bin\Debug\netcoreapp2.0\YazilimIsi.DataAccess.runtimeconfig.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.DataAccess\bin\Debug\netcoreapp2.0\YazilimIsi.DataAccess.runtimeconfig.dev.json

@@ -16,3 +16,5 @@ D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\Yaz
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.DataAccess.dll
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.Business.pdb
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.DataAccess.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.WebApp\bin\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.pdb

@@ -1,0 +1,12 @@
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\bin\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.deps.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\bin\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\bin\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.pdb
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Http.Features.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\bin\Debug\netcoreapp2.0\Microsoft.AspNetCore.Http.Features.xml
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\obj\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.csprojAssemblyReference.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\obj\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.csproj.CoreCompileInputs.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\obj\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.AssemblyInfoInputs.cache
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\obj\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.AssemblyInfo.cs
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\obj\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.csproj.CopyComplete
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\obj\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.dll
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.HelperFileUploader\obj\Debug\netcoreapp2.0\YazilimIsi.HelperFileUploader.pdb

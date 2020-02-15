@@ -12,3 +12,5 @@ D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\bin\Debug\netcoreapp2.0\Y
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\bin\Debug\netcoreapp2.0\YazilimIsi.Entity.pdb
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\obj\Debug\netcoreapp2.0\YazilimIsi.Business.csprojAssemblyReference.cache
 D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\obj\Debug\netcoreapp2.0\YazilimIsi.Business.csproj.CopyComplete
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\bin\Debug\netcoreapp2.0\YazilimIsi.Business.runtimeconfig.json
+D:\YazilimProjeleri2020\YazilimIsi\YazilimIsi.Business\bin\Debug\netcoreapp2.0\YazilimIsi.Business.runtimeconfig.dev.json

@@ -12,6 +12,11 @@
   <ItemGroup>
     <ProjectReference Include="..\YazilimIsi.Business\YazilimIsi.Business.csproj" />
     <ProjectReference Include="..\YazilimIsi.Entity\YazilimIsi.Entity.csproj" />
+    <ProjectReference Include="..\YazilimIsi.HelperFileUploader\YazilimIsi.HelperFileUploader.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\ImagesJob\" />
   </ItemGroup>
 
 </Project>

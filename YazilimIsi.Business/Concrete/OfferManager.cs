@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using YazilimIsi.Business.Abstract;
 using YazilimIsi.DataAccess.Abstract;
@@ -32,9 +33,20 @@ namespace YazilimIsi.Business.Concrete
             return _offerDal.Get(x => x.Id == Id);
         }
 
+        public List<Offer> GetOffersByJobId(int jobId)
+        {
+            List<Expression<Func<Offer, object>>> includesList = new List<Expression<Func<Offer, object>>>();
+            includesList.Add(x => x.Developer);
+            includesList.Add(x => x.Job);
+            return _offerDal.GetAll(x => x.JobId == jobId, includesList);
+        }
+
         public List<Offer> GettAllOffers()
         {
-            return _offerDal.GetAll();
+            List<Expression<Func<Offer, object>>> includesList = new List<Expression<Func<Offer, object>>>();
+            includesList.Add(x => x.Developer);
+            includesList.Add(x => x.Job);
+            return _offerDal.GetAll(null, includesList);
         }
 
         public void Update(Offer offer)

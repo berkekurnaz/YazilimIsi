@@ -1,4 +1,4 @@
-﻿@model YazilimIsi.Entity.Models.Job
+﻿@model YazilimIsi.WebApp.Models.IsverenIsDetayViewModel
 @{
     ViewData["Title"] = "IsDetay";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -41,39 +41,39 @@
                             <tbody>
                                 <tr>
                                     <td>Başlık</td>
-                                    <td>İlan Takip Otomasyonu Kodlanmasını İstiyorum</td>
+                                    <td>@Model.Job.Title</td>
                                 </tr>
                                 <tr>
                                     <td>Konum</td>
-                                    <td>Balıkesir / Türkiye</td>
+                                    <td>@Model.Job.Location</td>
                                 </tr>
                                 <tr>
                                     <td>Oluşturulma Tarihi</td>
-                                    <td>04/24/2020</td>
+                                    <td>@Model.Job.CreatedDate</td>
                                 </tr>
                                 <tr>
                                     <td>Kategori</td>
-                                    <td>Full Stack Yazılım</td>
+                                    <td>@Model.Job.Category</td>
                                 </tr>
                                 <tr>
                                     <td>Ücret</td>
-                                    <td>1200 TL</td>
+                                    <td>@Model.Job.Price</td>
                                 </tr>
                                 <tr>
                                     <td>Zaman</td>
-                                    <td>60 Gün</td>
+                                    <td>@Model.Job.Time</td>
                                 </tr>
                                 <tr>
                                     <td>Onay Durumu</td>
-                                    <td>Hayır</td>
+                                    <td>@Model.Job.IsConfirm</td>
                                 </tr>
                                 <tr>
                                     <td>Tamamlanma Durumu</td>
-                                    <td>Hayır</td>
+                                    <td>@Model.Job.IsCompleted</td>
                                 </tr>
                                 <tr>
                                     <td>Gösterim Sayısı</td>
-                                    <td>1230</td>
+                                    <td>@Model.Job.ViewCount</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -101,7 +101,7 @@
                                 İlan Küçük Fotoğraf
                             </div>
                             <div class="card-body">
-
+                                <img src="~/ImagesJob/@Model.Job.Photo" width="250" />
                             </div>
                         </div>
 
@@ -110,7 +110,7 @@
                                 İlan Açıklama Yazısı
                             </div>
                             <div class="card-body">
-
+                                <p>@Model.Job.Description</p>
                             </div>
                         </div>
 
@@ -123,7 +123,7 @@
                 <div class="card-header" id="headingThree">
                     <h3 class="mb-0">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            İlana Gelen Teklifleri Görüntüle - (5 Teklif)
+                            İlana Gelen Teklifleri Görüntüle - (5 Teklif) 
                         </button>
                     </h3>
                 </div>
@@ -141,33 +141,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Berke Kurnaz</td>
-                                        <td>1200 TL</td>
-                                        <td>60 Gün</td>
-                                        <td>
-                                            <a href="" class="btn btn-outline-info btn-sm">İncele</a>
-                                            <a href="" class="btn btn-outline-danger btn-sm">Sil</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Aslı Türk</td>
-                                        <td>1500 TL</td>
-                                        <td>37 Gün</td>
-                                        <td>
-                                            <a href="" class="btn btn-outline-info btn-sm">İncele</a>
-                                            <a href="" class="btn btn-outline-danger btn-sm">Sil</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Aylin Şimşek</td>
-                                        <td>2800 TL</td>
-                                        <td>28 Gün</td>
-                                        <td>
-                                            <a href="" class="btn btn-outline-info btn-sm">İncele</a>
-                                            <a href="" class="btn btn-outline-danger btn-sm">Sil</a>
-                                        </td>
-                                    </tr>
+                                    @foreach (var offer in Model.Offers)
+                                    {
+                                        <tr>
+                                            <td>@offer.Developer.Name @offer.Developer.Surname</td>
+                                            <td>@offer.Price TL</td>
+                                            <td>@offer.Time Gün</td>
+                                            <td>
+                                                <a href="" class="btn btn-outline-info btn-sm">İncele</a>
+                                                <a href="" class="btn btn-outline-danger btn-sm">Sil</a>
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

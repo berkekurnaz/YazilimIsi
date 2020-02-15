@@ -8,6 +8,8 @@ using YazilimIsi.Business.Abstract;
 using YazilimIsi.Business.Concrete;
 using YazilimIsi.DataAccess.Concrete;
 using YazilimIsi.Entity.Models;
+using YazilimIsi.HelperFileUploader.Concrete;
+using YazilimIsi.WebApp.Models;
 
 namespace YazilimIsi.WebApp.Controllers
 {
@@ -16,6 +18,7 @@ namespace YazilimIsi.WebApp.Controllers
 
         IUserService _userService = new UserManager(new EfUserDal());
         IJobService _jobService = new JobManager(new EfJobDal());
+        IOfferService _offerService = new OfferManager(new EfOfferDal());
 
         /* Isveren Yeni Is Olusturma */
         public IActionResult YeniIsOlustur()
@@ -23,7 +26,7 @@ namespace YazilimIsi.WebApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult YeniIsOlustur(Job job)
+        public async Task<IActionResult> YeniIsOlustur(Job job, IFormFile Image)
         {
             // İş Veren Bakiyesinden 1 TL Dusme
             int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
@@ -47,11 +50,20 @@ namespace YazilimIsi.WebApp.Controllers
                 TempData["AddErrorMessage"] = "Lütfen Boş Alanları Doldurunuz.";
                 return View();
             }
+
             job.CreatedDate = DateTime.Now;
             job.ViewCount = "0";
             job.UserId = userId;
             job.IsConfirm = false;
             job.IsCompleted = false;
+
+            // Is Ilani Resim Kaydetme
+            string guidImageName = Guid.NewGuid().ToString();
+            if (await KurnazFileUploader.UploadFile(Image, guidImageName, "ImagesJob") == true)
+            {
+                job.Photo = guidImageName + Image.FileName;
+            }
+
             _jobService.Add(job);
 
             TempData["AddSuccessMessage"] = "Oluşturduğunuz İlan Başarılı Bir Şekilde Sisteme Gönderildi. İnceleme İşlemlerinin Ardından Tarafınıza Bilgi Mesajı Gönderilecektir.";
@@ -75,11 +87,16 @@ namespace YazilimIsi.WebApp.Controllers
             {
                 return RedirectToAction("Hata", "Uye");
             }
-            if (job.Id != userId)
+            if (job.UserId != userId)
             {
                 return RedirectToAction("Hata", "Uye");
             }
-            return View(job);
+            IsverenIsDetayViewModel isverenIsDetayViewModel = new IsverenIsDetayViewModel();
+            isverenIsDetayViewModel.Job = job;
+            isverenIsDetayViewModel.User = null;
+            isverenIsDetayViewModel.Offers = _offerService.GetOffersByJobId(job.Id);
+
+            return View(isverenIsDetayViewModel);
         }
 
     }

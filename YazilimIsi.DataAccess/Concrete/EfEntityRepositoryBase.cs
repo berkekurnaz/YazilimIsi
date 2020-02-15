@@ -42,17 +42,53 @@ namespace YazilimIsi.DataAccess.Concrete
             }
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null,List<Expression<Func<TEntity, object>>> includes = null)
         {
             using (TContext context = new TContext())
             {
                 if (filter == null)
                 {
-                    return context.Set<TEntity>().ToList();
+                    if (includes == null)
+                    {
+                        return context.Set<TEntity>().ToList();
+                    }
+                    else
+                    {
+                        if(includes.Count == 1)
+                        {
+                            return context.Set<TEntity>().Include(includes[0]).ToList();
+                        }
+                        else if(includes.Count == 2)
+                        {
+                            return context.Set<TEntity>().Include(includes[0]).Include(includes[1]).ToList();
+                        }
+                        else
+                        {
+                            return context.Set<TEntity>().ToList();
+                        }
+                    }
                 }
                 else
                 {
-                    return context.Set<TEntity>().Where(filter).ToList();
+                    if (includes == null)
+                    {
+                        return context.Set<TEntity>().Where(filter).ToList();
+                    }
+                    else
+                    {
+                        if (includes.Count == 1)
+                        {
+                            return context.Set<TEntity>().Include(includes[0]).Where(filter).ToList();
+                        }
+                        else if (includes.Count == 2)
+                        {
+                            return context.Set<TEntity>().Include(includes[0]).Include(includes[1]).Where(filter).ToList();
+                        }
+                        else
+                        {
+                            return context.Set<TEntity>().Where(filter).ToList();
+                        }
+                    }
                 }
             }
         }

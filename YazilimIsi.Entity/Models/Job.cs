@@ -7,6 +7,7 @@ namespace YazilimIsi.Entity.Models
     {
         public Job()
         {
+            AccountActivity = new HashSet<AccountActivity>();
             Offer = new HashSet<Offer>();
         }
 
@@ -28,6 +29,7 @@ namespace YazilimIsi.Entity.Models
 
         public virtual Developer Developer { get; set; }
         public virtual User User { get; set; }
+        public virtual ICollection<AccountActivity> AccountActivity { get; set; }
         public virtual ICollection<Offer> Offer { get; set; }
     }
 }

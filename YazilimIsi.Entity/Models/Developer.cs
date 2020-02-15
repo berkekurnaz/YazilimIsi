@@ -7,6 +7,7 @@ namespace YazilimIsi.Entity.Models
     {
         public Developer()
         {
+            AccountActivity = new HashSet<AccountActivity>();
             Award = new HashSet<Award>();
             Education = new HashSet<Education>();
             JobNavigation = new HashSet<Job>();
@@ -38,6 +39,7 @@ namespace YazilimIsi.Entity.Models
         public string DeveloperAreas { get; set; }
         public string DeveloperSkills { get; set; }
 
+        public virtual ICollection<AccountActivity> AccountActivity { get; set; }
         public virtual ICollection<Award> Award { get; set; }
         public virtual ICollection<Education> Education { get; set; }
         public virtual ICollection<Job> JobNavigation { get; set; }
