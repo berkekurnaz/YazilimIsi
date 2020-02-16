@@ -42,7 +42,7 @@ namespace YazilimIsi.DataAccess.Concrete
             }
         }
 
-        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null,List<Expression<Func<TEntity, object>>> includes = null)
+        public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null,params Expression<Func<TEntity, object>>[] includes)
         {
             using (TContext context = new TContext())
             {
@@ -54,18 +54,9 @@ namespace YazilimIsi.DataAccess.Concrete
                     }
                     else
                     {
-                        if(includes.Count == 1)
-                        {
-                            return context.Set<TEntity>().Include(includes[0]).ToList();
-                        }
-                        else if(includes.Count == 2)
-                        {
-                            return context.Set<TEntity>().Include(includes[0]).Include(includes[1]).ToList();
-                        }
-                        else
-                        {
-                            return context.Set<TEntity>().ToList();
-                        }
+                        var query = context.Set<TEntity>().AsQueryable();
+                        query = includes.Aggregate(query,(current, include) => current.Include(include));
+                        return query.ToList();
                     }
                 }
                 else
@@ -76,18 +67,9 @@ namespace YazilimIsi.DataAccess.Concrete
                     }
                     else
                     {
-                        if (includes.Count == 1)
-                        {
-                            return context.Set<TEntity>().Include(includes[0]).Where(filter).ToList();
-                        }
-                        else if (includes.Count == 2)
-                        {
-                            return context.Set<TEntity>().Include(includes[0]).Include(includes[1]).Where(filter).ToList();
-                        }
-                        else
-                        {
-                            return context.Set<TEntity>().Where(filter).ToList();
-                        }
+                        var query = context.Set<TEntity>().Where(filter).AsQueryable();
+                        query = includes.Aggregate(query, (current, include) => current.Include(include));
+                        return query.ToList();
                     }
                 }
             }

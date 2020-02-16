@@ -35,18 +35,12 @@ namespace YazilimIsi.Business.Concrete
 
         public List<Offer> GetOffersByJobId(int jobId)
         {
-            List<Expression<Func<Offer, object>>> includesList = new List<Expression<Func<Offer, object>>>();
-            includesList.Add(x => x.Developer);
-            includesList.Add(x => x.Job);
-            return _offerDal.GetAll(x => x.JobId == jobId, includesList);
+            return _offerDal.GetAll(x => x.JobId == jobId, x => x.Developer, x => x.Job);
         }
 
         public List<Offer> GettAllOffers()
         {
-            List<Expression<Func<Offer, object>>> includesList = new List<Expression<Func<Offer, object>>>();
-            includesList.Add(x => x.Developer);
-            includesList.Add(x => x.Job);
-            return _offerDal.GetAll(null, includesList);
+            return _offerDal.GetAll(null, x => x.Developer, x => x.Job);
         }
 
         public void Update(Offer offer)
