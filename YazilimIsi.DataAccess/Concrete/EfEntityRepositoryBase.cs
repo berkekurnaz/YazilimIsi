@@ -34,11 +34,20 @@ namespace YazilimIsi.DataAccess.Concrete
             }
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public TEntity Get(Expression<Func<TEntity, bool>> filter, params Expression<Func<TEntity, object>>[] includes)
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().SingleOrDefault(filter);
+                if (includes == null)
+                {
+                    return context.Set<TEntity>().SingleOrDefault(filter);
+                }
+                else
+                {
+                    var query = context.Set<TEntity>().AsQueryable();
+                    query = includes.Aggregate(query, (current, include) => current.Include(include));
+                    return query.SingleOrDefault(filter);
+                }
             }
         }
 

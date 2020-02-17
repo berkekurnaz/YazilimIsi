@@ -75,7 +75,10 @@ namespace YazilimIsi.WebApp.Controllers
         {
             int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
             var userJobs = _jobService.GetJobsByUserId(userId);
-            return View(userJobs);
+            IsverenIslerViewModel isverenIslerViewModel = new IsverenIslerViewModel();
+            isverenIslerViewModel.UserJobs = userJobs;
+            isverenIslerViewModel.JobOfferCounts = _offerService.GettAllOffers();
+            return View(isverenIslerViewModel);
         }
 
         /* Isveren Is Detayi Goruntuleme */
@@ -97,6 +100,22 @@ namespace YazilimIsi.WebApp.Controllers
             isverenIsDetayViewModel.Offers = _offerService.GetOffersByJobId(job.Id);
 
             return View(isverenIsDetayViewModel);
+        }
+
+        /* Isveren Ise Gelen Teklifi Goruntuleme */
+        public IActionResult TeklifDetay(int Id)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            var offer = _offerService.GetOfferById(Id);
+            if (offer == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if(offer.Job.UserId != userId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(offer);
         }
 
     }

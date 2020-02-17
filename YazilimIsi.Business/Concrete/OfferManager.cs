@@ -30,7 +30,7 @@ namespace YazilimIsi.Business.Concrete
 
         public Offer GetOfferById(int Id)
         {
-            return _offerDal.Get(x => x.Id == Id);
+            return _offerDal.Get(x => x.Id == Id, x => x.Developer, x => x.Job);
         }
 
         public List<Offer> GetOffersByJobId(int jobId)

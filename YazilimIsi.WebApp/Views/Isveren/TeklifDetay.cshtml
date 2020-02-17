@@ -1,0 +1,140 @@
+﻿@model YazilimIsi.Entity.Models.Offer
+@{
+    ViewData["Title"] = "TeklifDetay";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Teklif Detayı İnceleme</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Teklif Detayı</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>İlgili İş İlanı</td>
+                            <td>@Model.Job.Title</td>
+                        </tr>
+                        <tr>
+                            <td>Yazılımcı</td>
+                            <td>@Model.Developer.Name @Model.Developer.Surname</td>
+                        </tr>
+                        <tr>
+                            <td>Teklif Fiyatı</td>
+                            <td>@Model.Price TL</td>
+                        </tr>
+                        <tr>
+                            <td>Teklif Süresi</td>
+                            <td>@Model.Time Gün</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Teklif Açıklama Yazısı</h3>
+                <hr />
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Yazılımcı Profili Ve Bilgiler</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Ad Soyad</td>
+                            <td>@Model.Developer.Name @Model.Developer.Surname</td>
+                        </tr>
+                        <tr>
+                            <td>Fotoğraf</td>
+                            <td>@Model.Developer.Photo</td>
+                        </tr>
+                        <tr>
+                            <td>Mail</td>
+                            <td>@Model.Developer.Mail</td>
+                        </tr>
+                        <tr>
+                            <td>Telefon</td>
+                            <td>@Model.Developer.Phone</td>
+                        </tr>
+                        <tr>
+                            <td>Şehir</td>
+                            <td>@Model.Developer.City</td>
+                        </tr>
+                        <tr>
+                            <td>Üyelik Tarihi</td>
+                            <td>@Model.Developer.CreatedDate</td>
+                        </tr>
+                        <tr>
+                            <td>Sosyal Medya</td>
+                            <td>
+                                @if (Model.Developer.MediaWebsite != null)
+                                {
+                                    <a href="@Model.Developer.MediaWebsite" target="_blank" style="margin-right:10px;"><i class="fa fa-laptop" style="font-size:20px;" aria-hidden="true"></i></a>
+                                }
+                                @if (Model.Developer.MediaGithub != null)
+                                {
+                                    <a href="@Model.Developer.MediaGithub" target="_blank" style="margin-right:10px;"><i class="fa fa-github" style="font-size:20px;" aria-hidden="true"></i></a>
+                                }
+                                @if (Model.Developer.MediaLinkedin != null)
+                                {
+                                    <a href="@Model.Developer.MediaLinkedin" target="_blank" style="margin-right:10px;"><i class="fa fa-linkedin" style="font-size:20px;" aria-hidden="true"></i></a>
+                                }
+                                @if (Model.Developer.MediaMedium != null)
+                                {
+                                    <a href="@Model.Developer.MediaMedium" target="_blank" style="margin-right:10px;"><i class="fa fa-medium" style="font-size:20px;" aria-hidden="true"></i></a>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Çalışma Alanları</td>
+                            <td>@Model.Developer.DeveloperAreas</td>
+                        </tr>
+                        <tr>
+                            <td>Yetenekleri</td>
+                            <td>@Model.Developer.DeveloperSkills</td>
+                        </tr>
+                        <tr>
+                            <td>Detaylı Profil</td>
+                            <td>
+                                <a href="/Yazilimci/Profil/@Model.Id" class="btn btn-outline-info btn-sm">İncele</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>İşlemler</h3>
+                <hr />
+                <a href="/Isveren/Isler" class="genric-btn info-border">Yazılımcıya Mail Gönder</a><br /><br />
+                <a href="/Isveren/Isler" class="genric-btn danger-border">Teklifi Şikayet Et</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

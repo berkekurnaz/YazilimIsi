@@ -57,11 +57,11 @@
                                 </tr>
                                 <tr>
                                     <td>Ücret</td>
-                                    <td>@Model.Job.Price</td>
+                                    <td>@Model.Job.Price TL</td>
                                 </tr>
                                 <tr>
                                     <td>Zaman</td>
-                                    <td>@Model.Job.Time</td>
+                                    <td>@Model.Job.Time Gün</td>
                                 </tr>
                                 <tr>
                                     <td>Onay Durumu</td>
@@ -123,7 +123,7 @@
                 <div class="card-header" id="headingThree">
                     <h3 class="mb-0">
                         <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            İlana Gelen Teklifleri Görüntüle - (5 Teklif) 
+                            İlana Gelen Teklifleri Görüntüle - (@Model.Offers.Count Teklif) 
                         </button>
                     </h3>
                 </div>
@@ -147,9 +147,8 @@
                                             <td>@offer.Developer.Name @offer.Developer.Surname</td>
                                             <td>@offer.Price TL</td>
                                             <td>@offer.Time Gün</td>
-                                            <td>
-                                                <a href="" class="btn btn-outline-info btn-sm">İncele</a>
-                                                <a href="" class="btn btn-outline-danger btn-sm">Sil</a>
+                                            <td class="text-center">
+                                                <a href="/Isveren/TeklifDetay/@offer.Id" class="btn btn-outline-info ">İncele</a>
                                             </td>
                                         </tr>
                                     }

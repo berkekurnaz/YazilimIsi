@@ -1,4 +1,4 @@
-﻿@model IEnumerable<YazilimIsi.Entity.Models.Job>
+﻿@model YazilimIsi.WebApp.Models.IsverenIslerViewModel
 @{
     ViewData["Title"] = "Isler";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
@@ -39,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.UserJobs)
                         {
                         <tr>
                             <th>@item.Id</th>
@@ -75,7 +75,7 @@
                                     <span>Hayır</span>
                                 }
                             </td>
-                            <td>4</td>
+                            <td>@Model.JobOfferCounts.Where(x => x.JobId == item.Id).Count()</td>
                             <td>
                                 <a href="/Isveren/IsDetay/@item.Id" class="btn btn-outline-info btn-sm">İncele</a>
                             </td>
