@@ -9,6 +9,7 @@ namespace YazilimIsi.Business.Abstract
     {
         List<Offer> GettAllOffers();
         List<Offer> GetOffersByJobId(int jobId);
+        List<Offer> GetOffersByUserId(int userId);
 
         Offer GetOfferById(int Id);
         void Add(Offer offer);

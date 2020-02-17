@@ -18,6 +18,7 @@ namespace YazilimIsi.WebApp.Controllers
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
         IUserService _userService = new UserManager(new EfUserDal());
         IJobService _jobService = new JobManager(new EfJobDal());
+        IOfferService _offerService = new OfferManager(new EfOfferDal());
 
         /* Yazilimci Profil Sayfasi */
         public IActionResult YazilimciProfil()
@@ -45,6 +46,10 @@ namespace YazilimIsi.WebApp.Controllers
             UserViewModels userViewModels = new UserViewModels();
             userViewModels.User = _userService.GetUserById(userId);
             userViewModels.UserJobs = _jobService.GetJobsByUserId(userId);
+
+            ViewBag.UserCreatedJobsCount = _jobService.GetJobsByUserId(userId).Count.ToString();
+            ViewBag.UserCreatedAndCompletedJobsCount = _jobService.GetJobsByUserId(userId).Where(x => x.IsCompleted == true).ToList().Count.ToString();
+            ViewBag.UserJobsOffersCount = _offerService.GetOffersByUserId(userId).Count.ToString();
 
             return View(userViewModels);
         }

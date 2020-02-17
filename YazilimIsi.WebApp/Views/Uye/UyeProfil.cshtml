@@ -107,7 +107,7 @@
                         <hr />
                         @foreach (var item in Model.UserJobs)
                         {
-                        <a href="/Isveren/IsDetay/@item.Id">@item.Title - @Convert.ToDateTime(item.CreatedDate).ToShortDateString() </a><br />
+                            <a href="/Isveren/IsDetay/@item.Id">@item.Title - @Convert.ToDateTime(item.CreatedDate).ToShortDateString() </a><br />
                         }
                         <br />
                         <a href="/Isveren/Isler" class="genric-btn info-border">Tamamını Görüntüle</a>
@@ -122,9 +122,9 @@
                         <h3>İstatistikleriniz</h3>
                         <hr />
 
-                        <a href=""><b>Toplam İş : </b>10</a><br />
-                        <a href=""><b>Tamamlanan İş : </b>5</a><br />
-                        <a href=""><b>İşlere Gelen Teklif Sayısı : </b>52</a><br />
+                        <a href=""><b>Toplam İş : </b>@ViewBag.UserCreatedJobsCount</a><br />
+                        <a href=""><b>Tamamlanan İş : </b>@ViewBag.UserCreatedAndCompletedJobsCount</a><br />
+                        <a href=""><b>İşlere Gelen Teklif Sayısı : </b>@ViewBag.UserJobsOffersCount</a><br />
                         <br />
                     </div>
                 </div>
