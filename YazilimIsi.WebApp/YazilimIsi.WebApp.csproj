@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\ImagesJob\" />
+    <Folder Include="wwwroot\SupportFiles\" />
   </ItemGroup>
 
 </Project>

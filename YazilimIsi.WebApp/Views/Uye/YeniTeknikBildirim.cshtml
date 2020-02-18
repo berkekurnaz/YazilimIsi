@@ -1,0 +1,115 @@
+﻿@model YazilimIsi.Entity.Models.Support
+@{
+    ViewData["Title"] = "YeniTeknikBildirim";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Yeni Teknik Bildirim Oluştur</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container text-center">
+
+        @if (TempData["AddErrorMessage"] != null)
+        {
+            <blockquote class="generic-blockquote">@TempData["AddErrorMessage"]</blockquote>
+        }
+
+        <form asp-controller="Uye" asp-action="YeniTeknikBildirim" method="post" enctype="multipart/form-data">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Yeni Teknik Bildirim Oluşturma Ekranına Hoşgeldin</h5>
+                    <hr />
+                    <p class="card-text">Teknik Bildirimin İle İlgili Detay Verirken Lütfen Bütün Alanları Doldurmaya Çalış.</p>
+                    <p class="card-text">Gönderilen Bildirimlerin İncelenmesinin Ardından En Kısa Sürede Size Geri Dönüş Sağlanır.</p>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Teknik Bildirim Başlığı</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <input type="text" asp-for="Title" class="form-control" placeholder="Teknik Bildirim Başlığını Giriniz..." required>
+                        <small>* Lütfen Teknik Bildirim Başlığı Belirtirken Açıklayıcı Ve Kısa Olmaya Çalışın.</small>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Teknik Bildirim Kategori Seçimi</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <select asp-for="Category">
+                            <option>Tüm Teknik Bildirimler Kategorisi</option>
+                            <option>Frontend Yazılım</option>
+                            <option>Backend Yazılım</option>
+                            <option>Full Stack Yazılım</option>
+                            <option>Mobil Uygulama Geliştirme</option>
+                            <option>Masaüstü Uygulama Geliştirme</option>
+                            <option>Gömülü Sistem Yazılımı</option>
+                            <option>Veritabanı Programcılığı</option>
+                            <option>Oyun Geliştirme</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Teknik Bildirim Ek Dosya</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <input class="form-control" type="file" name="Image" />
+                        <small>* Teknik Bildirim İle İlgili Eklemek İstediğiniz Dosya Varsa Ekleyebilirsiniz.</small>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Teknik Bildirim Açıklama Yazısı</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <small>* Lütfen Teknik Bildirim İle İlgili Detaylı Ve Açıklayıcı Bir Tanıtım Yazısı Giriniz</small>
+                        <textarea asp-for="Description" class="form-control" placeholder="Teknik Bildirim Tanıtım Yazısını Giriniz..." rows="8" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Teknik Bildirim İşlemler</h5>
+                    <hr />
+                    <div class="form-group col-md-8 mx-auto">
+                        <br />
+                        <button type="submit" class="genric-btn info">Teknik Bildirim Oluştur Ve Gönder</button>
+                        <br /><br />
+                        <small>* Teknik Bildirim Onaylandıktan Sonra Mail Adresinize Bilgi Mesajı Gönderilecektir.</small>
+                    </div>
+                </div>
+            </div>
+            <br />
+
+        </form>
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

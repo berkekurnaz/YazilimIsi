@@ -32,7 +32,8 @@ namespace YazilimIsi.Entity.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=DESKTOP-DF3RRQ5;Database=DbYazilimIsi;Trusted_Connection=True;MultipleActiveResultSets=true");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-DF3RRQ5;Database=DbYazilimIsi;Trusted_Connection=True;");
             }
         }
 
@@ -231,11 +232,15 @@ namespace YazilimIsi.Entity.Models
 
             modelBuilder.Entity<Support>(entity =>
             {
+                entity.Property(e => e.Category).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.SupportFile).HasMaxLength(250);
 
                 entity.Property(e => e.Title).HasMaxLength(250);
+
+                entity.Property(e => e.UserType).HasMaxLength(10);
 
                 entity.Property(e => e.Username).HasMaxLength(100);
             });

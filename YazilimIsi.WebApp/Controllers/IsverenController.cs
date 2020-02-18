@@ -98,7 +98,7 @@ namespace YazilimIsi.WebApp.Controllers
             isverenIsDetayViewModel.Job = job;
             isverenIsDetayViewModel.User = null;
             isverenIsDetayViewModel.Offers = _offerService.GetOffersByJobId(job.Id);
-
+  
             return View(isverenIsDetayViewModel);
         }
 

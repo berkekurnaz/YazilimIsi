@@ -1,0 +1,74 @@
+﻿@model YazilimIsi.Entity.Models.Support
+@{
+    ViewData["Title"] = "TeknikBildirimDetay";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Teknik Bildirim Detaylar</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Teknik Bildirim Detayları</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Başlık</td>
+                            <td>@Model.Title</td>
+                        </tr>
+                        <tr>
+                            <td>Kategori</td>
+                            <td>@Model.Category</td>
+                        </tr>
+                        <tr>
+                            <td>Oluşturulma Tarihi</td>
+                            <td>@Model.CreatedDate</td>
+                        </tr>
+                        <tr>
+                            <td>Tamamlanma Durumu</td>
+                            <td>@Model.IsCompleted</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Teknik Bildirim Açıklama Yazısı</h3>
+                <hr />
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <br />
+        @if (Model.SupportFile != null)
+        {
+            <div class="card text-center">
+                <div class="card-body">
+                    <h3>Teknik Bildirim Ek Dosya</h3>
+                    <hr />
+                    <p>Teknik Bildirim Ek Dosya Adı</p>
+                    <p>@Model.SupportFile</p>
+                </div>
+            </div>
+            <br />
+        }
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

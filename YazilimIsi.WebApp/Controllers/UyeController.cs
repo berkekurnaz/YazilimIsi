@@ -8,6 +8,7 @@ using YazilimIsi.Business.Abstract;
 using YazilimIsi.Business.Concrete;
 using YazilimIsi.DataAccess.Concrete;
 using YazilimIsi.Entity.Models;
+using YazilimIsi.HelperFileUploader.Concrete;
 using YazilimIsi.WebApp.Models;
 
 namespace YazilimIsi.WebApp.Controllers
@@ -19,6 +20,7 @@ namespace YazilimIsi.WebApp.Controllers
         IUserService _userService = new UserManager(new EfUserDal());
         IJobService _jobService = new JobManager(new EfJobDal());
         IOfferService _offerService = new OfferManager(new EfOfferDal());
+        ISupportService _supportService = new SupportManager(new EfSupportDal());
 
         /* Yazilimci Profil Sayfasi */
         public IActionResult YazilimciProfil()
@@ -50,6 +52,7 @@ namespace YazilimIsi.WebApp.Controllers
             ViewBag.UserCreatedJobsCount = _jobService.GetJobsByUserId(userId).Count.ToString();
             ViewBag.UserCreatedAndCompletedJobsCount = _jobService.GetJobsByUserId(userId).Where(x => x.IsCompleted == true).ToList().Count.ToString();
             ViewBag.UserJobsOffersCount = _offerService.GetOffersByUserId(userId).Count.ToString();
+            ViewBag.UserSupportsCountByOpen = _supportService.GetSupportsByUserId(userId).Where(x => x.IsCompleted == false).ToList().Count.ToString();
 
             return View(userViewModels);
         }
@@ -169,11 +172,101 @@ namespace YazilimIsi.WebApp.Controllers
             return View();
         }
 
+
+
+        /* Uye Teknik Bildirim Olusturma Sayfasi */
+        public IActionResult YeniTeknikBildirim()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> YeniTeknikBildirim(Support support, IFormFile Image)
+        {
+            int? userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            int? developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (userId == null && developerId == null)
+            {
+                return View("Hata");
+            }
+            if (support.Description.Length == 0 || support.Title.Length == 0)
+            {
+                return View();
+            }
+            support.CreatedDate = DateTime.Now;
+            support.IsCompleted = false;
+            if (userId != null && userId != 0)
+            {
+                support.Username = userId.ToString();
+                support.UserType = "User";
+            }
+            if (developerId != null && developerId != 0)
+            {
+                support.Username = developerId.ToString();
+                support.UserType = "Developer";
+            }
+            // Ek Dosya Varsa Onu Ekleme
+            if (Image != null)
+            {
+                string guidFileName = Guid.NewGuid().ToString();
+                if (await KurnazFileUploader.UploadFile(Image, guidFileName, "SupportFiles") == true)
+                {
+                    support.SupportFile = guidFileName + Image.FileName;
+                }
+            }
+            _supportService.Add(support);
+            TempData["AddSuccessMessage"] = "Yeni Teknik Bildirim Başarıyla Oluşturuldu. Gerekli İncelemelerin Ardından Geri Dönüş Sağlanacaktır.";
+            if (userId != null)
+            {
+                return RedirectToAction("UyeProfil");
+            }
+            return RedirectToAction("YazilimciProfil");
+        }
+
+        /* Uye Teknik Bildirimleri Listeleme */
+        public IActionResult TeknikBildirimler()
+        {
+            int? userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            int? developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            List<Support> supportList = new List<Support>();
+            if (userId != null && userId != 0)
+            {
+                supportList = _supportService.GetSupportsByUserId(userId).Where(x => x.UserType == "User").ToList();
+            }
+            else
+            {
+                supportList = _supportService.GetSupportsByDeveloperId(developerId).Where(x => x.UserType == "Developer").ToList(); ;
+            }
+            return View(supportList);
+        }
+
+        /* Uye Teknik Bildirim Detay Sayfasi */
+        public IActionResult TeknikBildirimDetay(int Id)
+        {
+            int? userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            int? developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (userId == null && developerId == null)
+            {
+                return View("Hata");
+            }
+            Support support = _supportService.GetSupportById(Id);
+            if (support == null)
+            {
+                return View("Hata");
+            }
+            if (support.Username != userId.ToString() && support.Username != developerId.ToString())
+            {
+                return View("Hata");
+            }
+            return View(support);
+        }
+        
+
+
         /* Uye Cikis Islemi */
         public IActionResult Cikis()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index","Anasayfa");
+            return RedirectToAction("Index", "Anasayfa");
         }
 
         /* Hata Sayfası */

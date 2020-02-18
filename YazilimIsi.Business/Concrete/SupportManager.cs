@@ -37,6 +37,16 @@ namespace YazilimIsi.Business.Concrete
             return _supportDal.Get(x => x.Id == Id);
         }
 
+        public List<Support> GetSupportsByDeveloperId(int? developerId)
+        {
+            return _supportDal.GetAll(x => x.Username == developerId.ToString());
+        }
+
+        public List<Support> GetSupportsByUserId(int? userId)
+        {
+            return _supportDal.GetAll(x => x.Username == userId.ToString());
+        }
+
         public void Update(Support support)
         {
             _supportDal.Update(support);
