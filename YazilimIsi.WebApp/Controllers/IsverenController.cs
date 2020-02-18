@@ -118,5 +118,45 @@ namespace YazilimIsi.WebApp.Controllers
             return View(offer);
         }
 
+        /* Ilan Yayindan Kaldirma */
+        public IActionResult YayindanKaldir(int Id)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            Job job = _jobService.GetJobById(Id);
+            if (job == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if (job.UserId != userId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            job.IsCompleted = true;
+            _jobService.Update(job);
+            TempData["UpdateSuccessMessage"] = "İlanınız Yayından Başarıyla Kaldırıldı.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
+        /* Ilan Tamamlama */
+        public IActionResult Tamamlandir(int Id)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            Job job = _jobService.GetJobById(Id);
+            if (job == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if (job.UserId != userId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            job.IsCompleted = true;
+            _jobService.Update(job);
+            TempData["UpdateSuccessMessage"] = "İlanınız Yayından Başarıyla Kaldırıldı.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
+        /* Ilan Teklif Sikayet Etme */
+
     }
 }
