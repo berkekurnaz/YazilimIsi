@@ -211,5 +211,142 @@ namespace YazilimIsi.WebApp.Controllers
             return View(accountActivity);
         }
 
+
+
+        /* Isveren Profil Duzenleme Islemi */
+        public IActionResult ProfilDuzenle()
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            User user = _userService.GetUserById(userId);
+            if (user == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(user);
+        }
+        [HttpPost]
+        public IActionResult DuzenleSifre(int Id, string EskiSifre, string YeniSifre1, string YeniSifre2)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            if (userId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            User user = _userService.GetUserById(userId);
+            if(user.Password == EskiSifre)
+            {
+                if(YeniSifre1 == YeniSifre2)
+                {
+                    user.Password = YeniSifre1;
+                    _userService.Update(user);
+                }
+                else
+                {
+                    TempData["UpdateErrorMessage"] = "Girdiğiniz Şifreler Birbiriyle Aynı Değil.";
+                    return RedirectToAction("ProfilDuzenle");
+                }
+            }
+            else
+            {
+                TempData["UpdateErrorMessage"] = "Eski Şifrenizi Yanlış Girdiniz.";
+                return RedirectToAction("ProfilDuzenle");
+            }
+
+            TempData["AddSuccessMessage"] = "Şifre Başarıyla Güncellendi.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
+        [HttpPost]
+        public IActionResult DuzenleAdres(int Id, User user)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            if (userId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            User findUser = _userService.GetUserById(userId);
+            findUser.Country = user.Country;
+            findUser.City = user.City;
+            findUser.Address = user.Address;
+            _userService.Update(findUser);
+
+            TempData["AddSuccessMessage"] = "Adres Bilgileri Başarıyla Güncellendi.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
+        [HttpPost]
+        public IActionResult DuzenleAciklama(int Id, User user)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            if (userId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            User findUser = _userService.GetUserById(userId);
+            findUser.Description = user.Description;
+            _userService.Update(findUser);
+
+            TempData["AddSuccessMessage"] = "Açıklama Yazısı Başarıyla Güncellendi.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
+        [HttpPost]
+        public IActionResult DuzenleTemel(int Id, User user)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            if (userId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            User findUser = _userService.GetUserById(userId);
+            findUser.Name = user.Name;
+            findUser.Surname = user.Surname;
+            findUser.Job = user.Job;
+            // findUser.Mail = user.Mail;
+            findUser.Phone = user.Phone;
+            _userService.Update(findUser);
+
+            TempData["AddSuccessMessage"] = "Profil Bilgileri Başarıyla Güncellendi.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
+
+
+        /* Isveren Fotograf Duzenleme Islemi */
+        public IActionResult FotografDuzenle()
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            User user = _userService.GetUserById(userId);
+            if (user == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(user);
+        }
+        [HttpPost]
+        public async Task<IActionResult> FotografDuzenle(int Id, User user, IFormFile Image)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            if (userId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            User findUser = _userService.GetUserById(userId);
+            string guidImageName = Guid.NewGuid().ToString();
+            if (await KurnazFileUploader.UpdateFile(Image, guidImageName, "ImagesUser", guidImageName, "defaultuser.png") == true)
+            {
+                findUser.Photo = guidImageName + Image.FileName;
+                _userService.Update(findUser);
+            }
+            else
+            {
+                TempData["UpdateErrorMessage"] = "Fotograf Yüklenme Hatası Oluştu.";
+                return RedirectToAction("FotografDuzenle");
+            }
+
+            TempData["AddSuccessMessage"] = "Fotograf Başarıyla Güncellendi.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
     }
 }
