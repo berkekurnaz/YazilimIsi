@@ -19,6 +19,8 @@ namespace YazilimIsi.WebApp.Controllers
         IUserService _userService = new UserManager(new EfUserDal());
         IJobService _jobService = new JobManager(new EfJobDal());
         IOfferService _offerService = new OfferManager(new EfOfferDal());
+        ISupportService _supportService = new SupportManager(new EfSupportDal());
+        IAccountActivityService _accountActivityService = new AccountActivityManager(new EfAccountActivityDal());
 
         /* Isveren Yeni Is Olusturma */
         public IActionResult YeniIsOlustur()
@@ -42,7 +44,14 @@ namespace YazilimIsi.WebApp.Controllers
             _userService.Update(user);
 
             // Hesap Hareketlerine Bu Islemi Yazdirma
-
+            AccountActivity accountActivity = new AccountActivity();
+            accountActivity.Title = "İş İlanı Oluşturma Gideri";
+            accountActivity.Description = "İş İlanı Oluşturulduğu İçin Hesabınızdan 1 TL Alınmıştır.";
+            accountActivity.CreatedDate = DateTime.Now;
+            accountActivity.IsIncrease = false;
+            accountActivity.UserId = userId;
+            accountActivity.Money = "1";
+            _accountActivityService.Add(accountActivity);
 
             // Yeni Is İlanı Olusturma
             if (job.Title.Length == 0 || job.Description.Length == 0)
@@ -157,6 +166,50 @@ namespace YazilimIsi.WebApp.Controllers
         }
 
         /* Ilan Teklif Sikayet Etme */
+        [HttpPost]
+        public IActionResult TeklifSikayet(string Description)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            Support support = new Support();
+            if (Description.Length < 10)
+            {
+                return View();
+            }
+            support.Title = "Yazılım Teklif Şikayeti";
+            support.Description = Description;
+            support.Category = "Teklif Şikayet";
+            support.CreatedDate = DateTime.Now;
+            support.IsCompleted = false;
+            support.Username = userId.ToString();
+            support.UserType = "User";
+            _supportService.Add(support);
+            TempData["AddSuccessMessage"] = "Oluşturduğunuz Şikayet Metni Başarıyla Gönderildi.";
+            return RedirectToAction("UyeProfil", "Uye");
+        }
+
+        /* Isveren Hesap Hareketleri Sayfasi */
+        public IActionResult HesapHareketleri()
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            List<AccountActivity> activities = _accountActivityService.GetAllAccountActivitiesByUserId(userId);
+            return View(activities);
+        }
+
+        /* Isveren Hesap Hareketi Detay Sayfasi */
+        public IActionResult HesapHareketDetay(int Id)
+        {
+            int userId = Convert.ToInt32(HttpContext.Session.GetString("SessionUserId"));
+            AccountActivity accountActivity = _accountActivityService.GetAccountActivityById(Id);
+            if (accountActivity == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if (accountActivity.UserId != userId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(accountActivity);
+        }
 
     }
 }

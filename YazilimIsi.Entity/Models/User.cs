@@ -7,6 +7,7 @@ namespace YazilimIsi.Entity.Models
     {
         public User()
         {
+            AccountActivity = new HashSet<AccountActivity>();
             JobNavigation = new HashSet<Job>();
         }
 
@@ -27,6 +28,7 @@ namespace YazilimIsi.Entity.Models
         public string Password { get; set; }
         public bool? IsConfirm { get; set; }
 
+        public virtual ICollection<AccountActivity> AccountActivity { get; set; }
         public virtual ICollection<Job> JobNavigation { get; set; }
     }
 }

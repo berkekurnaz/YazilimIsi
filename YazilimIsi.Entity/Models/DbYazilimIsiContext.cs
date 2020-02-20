@@ -57,7 +57,7 @@ namespace YazilimIsi.Entity.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.AccountActivity)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK_AccountActivity_Job");
+                    .HasConstraintName("FK_AccountActivity_User");
             });
 
             modelBuilder.Entity<Award>(entity =>

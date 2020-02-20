@@ -131,10 +131,38 @@
                 <h3>İşlemler</h3>
                 <hr />
                 <a href="/Isveren/Isler" class="genric-btn info-border">Yazılımcıya Mail Gönder</a><br /><br />
-                <a href="/Isveren/Isler" class="genric-btn danger-border">Teklifi Şikayet Et</a>
+                <a href="/Isveren/Isler" data-toggle="modal" data-target="#modalSikayetEt" class="genric-btn danger-border">Teklifi Şikayet Et</a>
             </div>
         </div>
 
     </div>
 </div>
 <!-- featured_candidates_area_end  -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalSikayetEt" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Teklifi Şikayet Et</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bu İlanı Gerçekten Şikayet Etmek İstiyor Musun?
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                    <form asp-controller="Isveren" asp-action="TeklifSikayet" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <textarea id="Description" name="Description" class="form-control" rows="6" placeholder="Şikayet Metninizi Giriniz..." minlength="10" required></textarea>
+                        </div>
+                        <button type="button" class="genric-btn info" data-dismiss="modal">Kapat</button>
+                        <button type="submit" class="genric-btn danger">Şikayet Et</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

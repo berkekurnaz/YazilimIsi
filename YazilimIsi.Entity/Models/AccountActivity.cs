@@ -15,6 +15,6 @@ namespace YazilimIsi.Entity.Models
         public string Money { get; set; }
 
         public virtual Developer Developer { get; set; }
-        public virtual Job User { get; set; }
+        public virtual User User { get; set; }
     }
 }
