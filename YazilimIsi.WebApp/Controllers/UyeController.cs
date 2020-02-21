@@ -36,14 +36,32 @@ namespace YazilimIsi.WebApp.Controllers
             developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
             Developer developer = _developerService.GetDeveloperById(developerId);
 
+
             YazilimciViewModels yazilimciViewModels = new YazilimciViewModels();
             yazilimciViewModels.Developer = developer;
-            yazilimciViewModels.LastFiveOffers = _offerService.GetOffersByDeveloperId(developerId);
-            yazilimciViewModels.LastFivePortfolio = _portfolioService.GetPortfoliosByDeveloperId(developerId);
-            yazilimciViewModels.LastFiveAwards = _awardService.GetAwardsByDeveloperId(developerId);
-            yazilimciViewModels.DeveloperSkills = developer.DeveloperSkills.Split(',').ToList();
-            yazilimciViewModels.DeveloperAreas = developer.DeveloperAreas.Split(',').ToList();
+            yazilimciViewModels.LastFiveOffers = _offerService.GetOffersByDeveloperId(developerId).Take(5).ToList();
+            yazilimciViewModels.LastFivePortfolio = _portfolioService.GetPortfoliosByDeveloperId(developerId).Take(5).ToList();
+            yazilimciViewModels.LastFiveAwards = _awardService.GetAwardsByDeveloperId(developerId).Take(5).ToList();
 
+            if (developer.DeveloperSkills.Length > 1 && developer.DeveloperSkills.Contains(","))
+            {
+                yazilimciViewModels.DeveloperSkills = developer.DeveloperSkills.Split(',').ToList();
+            }
+            else
+            {
+                List<string> stringlist = new List<string>();
+                yazilimciViewModels.DeveloperSkills = stringlist;
+            }
+
+            if (developer.DeveloperAreas.Length > 1 && developer.DeveloperAreas.Contains(","))
+            {
+                yazilimciViewModels.DeveloperAreas = developer.DeveloperAreas.Split(',').ToList();
+            }
+            else
+            {
+                List<string> stringlist = new List<string>();
+                yazilimciViewModels.DeveloperAreas = stringlist;
+            }
             return View(yazilimciViewModels);
         }
 

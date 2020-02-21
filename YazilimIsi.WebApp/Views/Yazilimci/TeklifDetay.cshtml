@@ -1,8 +1,81 @@
-﻿
+﻿@model YazilimIsi.Entity.Models.Offer
 @{
     ViewData["Title"] = "TeklifDetay";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
-<h2>TeklifDetay</h2>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Teklif Detayı İnceleme</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
 
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Teklif Detayı</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>İlgili İş İlanı</td>
+                            <td>@Model.Job.Title</td>
+                        </tr>
+                        <tr>
+                            <td>Teklif Tarihi</td>
+                            <td>@Convert.ToDateTime(Model.CreatedDate).ToShortDateString()</td>
+                        </tr>
+                        <tr>
+                            <td>Teklif Fiyatı</td>
+                            <td>@Model.Price TL</td>
+                        </tr>
+                        <tr>
+                            <td>Teklif Süresi</td>
+                            <td>@Model.Time Gün</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Teklif Açıklama Yazısı</h3>
+                <hr />
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Teklif İş Açıklama Yazısı</h3>
+                <hr />
+                <p>Kategori: @Model.Job.Category</p><br />
+                <p>İlan Tarihi: @Model.Job.CreatedDate</p><br />
+                <p>Teklif Bütçesi: @Model.Job.Price TL</p><br />
+                <p>Teklif İstenilen Süre: @Model.Job.Time Gün</p><br />
+                <p>@Model.Job.Description</p>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>İşlemler</h3>
+                <hr />
+                <a href="/Yazilimci/Teklifler" class="genric-btn info-border">Geriye Dön</a><br /><br />
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

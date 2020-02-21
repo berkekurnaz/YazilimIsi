@@ -9,6 +9,7 @@ namespace YazilimIsi.Entity.Models
         public string Price { get; set; }
         public string Time { get; set; }
         public string Description { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public int? JobId { get; set; }
         public int? DeveloperId { get; set; }
 

@@ -1,8 +1,69 @@
-﻿
+﻿@model IEnumerable<YazilimIsi.Entity.Models.Offer>
 @{
     ViewData["Title"] = "Teklifler";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
-<h2>Teklifler</h2>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Verdiğin Bütün Teklifler</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
 
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Verdiğin Bütün Teklifler</h3>
+                <hr />
+                <table class="table table-bordered table-striped table-responsive-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Numara</th>
+                            <th scope="col">Başlık</th>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Gün</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.Id</th>
+                                <td>
+                                    @if (item.Job.Title.Length > 30)
+                                    {
+                                        @item.Job.Title.Substring(0, 29) <span>...</span>
+                                    }
+                                    else
+                                    {
+                                        @item.Job.Title
+                                    }
+                                </td>
+                                <td>@Convert.ToDateTime(item.CreatedDate).ToShortDateString()</td>
+                                <td>@item.Price TL</td>
+                                <td>@item.Time Gün</td>
+                                <td>
+                                    <a href="/Yazilimci/TeklifDetay/@item.Id" class="btn btn-outline-info btn-sm">İncele</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

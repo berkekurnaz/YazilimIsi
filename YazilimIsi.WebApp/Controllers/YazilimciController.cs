@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using YazilimIsi.Business.Abstract;
 using YazilimIsi.Business.Concrete;
 using YazilimIsi.DataAccess.Concrete;
+using YazilimIsi.Entity.Models;
 
 namespace YazilimIsi.WebApp.Controllers
 {
@@ -28,15 +30,27 @@ namespace YazilimIsi.WebApp.Controllers
         }
 
         /* Yazilimci Verdigi Teklifler Listesi */
-        public IActionResult Teklifler(int Id)
+        public IActionResult Teklifler()
         {
-            return View();
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            List<Offer> offers = _offerService.GetOffersByDeveloperId(developerId);
+            return View(offers);
         }
 
         /* Yazilimci Verdigi Teklif Detayi */
         public IActionResult TeklifDetay(int Id)
         {
-            return View();
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            Offer offer = _offerService.GetOfferById(Id);
+            if (offer == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if(offer.DeveloperId != developerId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(offer);
         }
 
 

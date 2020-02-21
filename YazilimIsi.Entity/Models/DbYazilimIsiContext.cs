@@ -199,6 +199,8 @@ namespace YazilimIsi.Entity.Models
 
             modelBuilder.Entity<Offer>(entity =>
             {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Description).HasMaxLength(500);
 
                 entity.Property(e => e.Price).HasMaxLength(10);
