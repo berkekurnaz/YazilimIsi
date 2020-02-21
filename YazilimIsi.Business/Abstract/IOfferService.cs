@@ -10,6 +10,7 @@ namespace YazilimIsi.Business.Abstract
         List<Offer> GettAllOffers();
         List<Offer> GetOffersByJobId(int jobId);
         List<Offer> GetOffersByUserId(int userId);
+        List<Offer> GetOffersByDeveloperId(int developerId);
 
         Offer GetOfferById(int Id);
         void Add(Offer offer);

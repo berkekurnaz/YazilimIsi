@@ -33,6 +33,11 @@ namespace YazilimIsi.Business.Concrete
             return _offerDal.Get(x => x.Id == Id, x => x.Developer, x => x.Job);
         }
 
+        public List<Offer> GetOffersByDeveloperId(int developerId)
+        {
+            return _offerDal.GetAll(x => x.Job.DeveloperId == developerId, x => x.Developer, x => x.Job);
+        }
+
         public List<Offer> GetOffersByJobId(int jobId)
         {
             return _offerDal.GetAll(x => x.JobId == jobId, x => x.Developer, x => x.Job);

@@ -17,6 +17,9 @@ namespace YazilimIsi.WebApp.Controllers
     {
 
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
+        IPortfolioService _portfolioService = new PortfolioManager(new EfPortfolioDal());
+        IAwardService _awardService = new AwardManager(new EfAwardDal());
+
         IUserService _userService = new UserManager(new EfUserDal());
         IJobService _jobService = new JobManager(new EfJobDal());
         IOfferService _offerService = new OfferManager(new EfOfferDal());
@@ -31,8 +34,17 @@ namespace YazilimIsi.WebApp.Controllers
                 return RedirectToAction("Index", "Anasayfa");
             }
             developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            Developer developer = _developerService.GetDeveloperById(developerId);
 
-            return View(_developerService.GetDeveloperById(developerId));
+            YazilimciViewModels yazilimciViewModels = new YazilimciViewModels();
+            yazilimciViewModels.Developer = developer;
+            yazilimciViewModels.LastFiveOffers = _offerService.GetOffersByDeveloperId(developerId);
+            yazilimciViewModels.LastFivePortfolio = _portfolioService.GetPortfoliosByDeveloperId(developerId);
+            yazilimciViewModels.LastFiveAwards = _awardService.GetAwardsByDeveloperId(developerId);
+            yazilimciViewModels.DeveloperSkills = developer.DeveloperSkills.Split(',').ToList();
+            yazilimciViewModels.DeveloperAreas = developer.DeveloperAreas.Split(',').ToList();
+
+            return View(yazilimciViewModels);
         }
 
         /* IsVeren Profil Sayfasi */
