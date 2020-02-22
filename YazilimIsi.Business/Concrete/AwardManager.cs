@@ -29,17 +29,17 @@ namespace YazilimIsi.Business.Concrete
 
         public List<Award> GetAllAwards()
         {
-            return _awardDal.GetAll();
+            return _awardDal.GetAll(null, x => x.Developer);
         }
 
         public Award GetAwardById(int Id)
         {
-            return _awardDal.Get(x => x.Id == Id);
+            return _awardDal.Get(x => x.Id == Id,x => x.Developer);
         }
 
         public List<Award> GetAwardsByDeveloperId(int developerId)
         {
-            return _awardDal.GetAll(x => x.DeveloperId == developerId);
+            return _awardDal.GetAll(x => x.DeveloperId == developerId, x=> x.Developer);
         }
 
         public void Update(Award award)

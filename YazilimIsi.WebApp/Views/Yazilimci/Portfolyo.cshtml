@@ -1,0 +1,65 @@
+﻿@model IEnumerable<YazilimIsi.Entity.Models.Portfolio>
+@{
+    ViewData["Title"] = "Portfolyo";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Portfolyonuz</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Oluşturduğun Portfolyo</h3>
+                <hr />
+                <table class="table table-bordered table-striped table-responsive-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">Numara</th>
+                            <th scope="col">Proje İsmi</th>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <th>@item.Id</th>
+                                <td>
+                                    @if (item.ProjectName.Length > 30)
+                                    {
+                                        @item.ProjectName.Substring(0, 29) <span>...</span>
+                                    }
+                                    else
+                                    {
+                                        @item.ProjectName
+                                    }
+                                </td>
+                                <td>@item.CreatedDate</td>
+                                <td>
+                                    <a href="/Yazilimci/PortfolyoDetay/@item.Id" class="btn btn-outline-info btn-sm">İncele</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->
