@@ -218,5 +218,125 @@ namespace YazilimIsi.WebApp.Controllers
         }
 
 
+
+        /* Yazilimci Profil Duzenleme Islemi */
+        public IActionResult ProfilDuzenle()
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            Developer developer = _developerService.GetDeveloperById(developerId);
+            if (developer == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(developer);
+        }
+        [HttpPost]
+        public IActionResult DuzenleTemel(int Id, Developer developer)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (developerId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            Developer findDeveloper = _developerService.GetDeveloperById(developerId);
+            findDeveloper.Name = developer.Name;
+            findDeveloper.Surname = developer.Surname;
+            findDeveloper.Job = developer.Job;
+            // findDeveloper.Mail = user.Mail;
+            findDeveloper.Phone = developer.Phone;
+            _developerService.Update(findDeveloper);
+
+            TempData["AddSuccessMessage"] = "Profil Bilgileri Başarıyla Güncellendi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        [HttpPost]
+        public IActionResult DuzenleAciklama(int Id, Developer developer)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (developerId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            Developer findDeveloper = _developerService.GetDeveloperById(developerId);
+            findDeveloper.Description = developer.Description;
+            _developerService.Update(findDeveloper);
+
+            TempData["AddSuccessMessage"] = "Açıklama Yazısı Başarıyla Güncellendi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        [HttpPost]
+        public IActionResult DuzenleAdres(int Id, Developer developer)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (developerId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            Developer findDeveloper = _developerService.GetDeveloperById(developerId);
+            findDeveloper.Country = developer.Country;
+            findDeveloper.City = developer.City;
+            findDeveloper.Address = developer.Address;
+            _developerService.Update(findDeveloper);
+
+            TempData["AddSuccessMessage"] = "Adres Bilgileri Başarıyla Güncellendi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        [HttpPost]
+        public IActionResult DuzenleSosyal(int Id, Developer developer)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (developerId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            Developer findDeveloper = _developerService.GetDeveloperById(developerId);
+            findDeveloper.MediaWebsite = developer.MediaWebsite;
+            findDeveloper.MediaLinkedin = developer.MediaLinkedin;
+            findDeveloper.MediaGithub = developer.MediaGithub;
+            findDeveloper.MediaMedium = developer.MediaMedium;
+            _developerService.Update(findDeveloper);
+
+            TempData["AddSuccessMessage"] = "Sosyal Medya Bilgileri Başarıyla Güncellendi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        [HttpPost]
+        public IActionResult DuzenleSifre(int Id, string EskiSifre, string YeniSifre1, string YeniSifre2)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (developerId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            Developer developer = _developerService.GetDeveloperById(developerId);
+            if (developer.Password == EskiSifre)
+            {
+                if (YeniSifre1 == YeniSifre2)
+                {
+                    developer.Password = YeniSifre1;
+                    _developerService.Update(developer);
+                }
+                else
+                {
+                    TempData["UpdateErrorMessage"] = "Girdiğiniz Şifreler Birbiriyle Aynı Değil.";
+                    return RedirectToAction("ProfilDuzenle");
+                }
+            }
+            else
+            {
+                TempData["UpdateErrorMessage"] = "Eski Şifrenizi Yanlış Girdiniz.";
+                return RedirectToAction("ProfilDuzenle");
+            }
+
+            TempData["AddSuccessMessage"] = "Şifre Başarıyla Güncellendi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+
+
+
     }
 }

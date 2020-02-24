@@ -224,6 +224,7 @@ namespace YazilimIsi.WebApp.Controllers
             }
             return View(user);
         }
+
         [HttpPost]
         public IActionResult DuzenleSifre(int Id, string EskiSifre, string YeniSifre1, string YeniSifre2)
         {
