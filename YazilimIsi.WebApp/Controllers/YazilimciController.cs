@@ -220,6 +220,32 @@ namespace YazilimIsi.WebApp.Controllers
 
 
 
+        /* Isveren Hesap Hareketleri Sayfasi */
+        public IActionResult HesapHareketleri()
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            List<AccountActivity> activities = _accountActivityService.GetAllAccountActivitiesByDeveloperId(developerId);
+            return View(activities);
+        }
+
+        /* Isveren Hesap Hareketi Detay Sayfasi */
+        public IActionResult HesapHareketDetay(int Id)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            AccountActivity accountActivity = _accountActivityService.GetAccountActivityById(Id);
+            if (accountActivity == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if (accountActivity.DeveloperId != developerId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(accountActivity);
+        }
+
+
+
         /* Yazilimci Profil Duzenleme Islemi */
         public IActionResult ProfilDuzenle()
         {

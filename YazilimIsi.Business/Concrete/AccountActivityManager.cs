@@ -37,6 +37,11 @@ namespace YazilimIsi.Business.Concrete
             return _accountActivityDal.GetAll();
         }
 
+        public List<AccountActivity> GetAllAccountActivitiesByDeveloperId(int developerId)
+        {
+            return _accountActivityDal.GetAll(x => x.DeveloperId == developerId);
+        }
+
         public List<AccountActivity> GetAllAccountActivitiesByUserId(int userId)
         {
             return _accountActivityDal.GetAll(x => x.UserId == userId);

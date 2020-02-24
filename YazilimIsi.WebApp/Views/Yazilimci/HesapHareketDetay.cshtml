@@ -1,0 +1,78 @@
+﻿@model YazilimIsi.Entity.Models.AccountActivity
+@{
+    ViewData["Title"] = "HesapHareketDetay";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Hesap Hareketi Detayları</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Hesap Hareket Detayı</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Hareket Başlığı</td>
+                            <td>@Model.Title</td>
+                        </tr>
+                        <tr>
+                            <td>Hareket Oluşturulma Tarihi</td>
+                            <td>@Convert.ToDateTime(Model.CreatedDate).ToShortDateString()</td>
+                        </tr>
+                        <tr>
+                            <td>Hareket Durumu</td>
+                            <td>
+                                @if (Model.IsIncrease == true)
+                                {
+                                    <span>+ (Gelir)</span>
+                                }
+                                else
+                                {
+                                    <span>- (Gider)</span>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Hareket Miktarı</td>
+                            <td>@Model.Money TL</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Hareket Açıklama Yazısı</h3>
+                <hr />
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>İşlemler</h3>
+                <hr />
+                <a href="/Yazilimci/HesapHareketleri" class="genric-btn info-border">Geriye Dön</a><br />
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->

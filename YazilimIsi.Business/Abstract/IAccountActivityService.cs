@@ -9,6 +9,7 @@ namespace YazilimIsi.Business.Abstract
     {
         List<AccountActivity> GetAllAccountActivities();
         List<AccountActivity> GetAllAccountActivitiesByUserId(int userId);
+        List<AccountActivity> GetAllAccountActivitiesByDeveloperId(int developerId);
 
         AccountActivity GetAccountActivityById(int Id);
         void Add(AccountActivity accountActivity);
