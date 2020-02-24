@@ -8,6 +8,7 @@ using YazilimIsi.Business.Abstract;
 using YazilimIsi.Business.Concrete;
 using YazilimIsi.DataAccess.Concrete;
 using YazilimIsi.Entity.Models;
+using YazilimIsi.HelperFileUploader.Concrete;
 using YazilimIsi.WebApp.Models;
 
 namespace YazilimIsi.WebApp.Controllers
@@ -336,6 +337,42 @@ namespace YazilimIsi.WebApp.Controllers
         }
 
 
+
+        /* Yazilimci Fotograf Duzenleme Islemi */
+        public IActionResult FotografDuzenle()
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            Developer developer = _developerService.GetDeveloperById(developerId);
+            if (developer == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(developer);
+        }
+        [HttpPost]
+        public async Task<IActionResult> FotografDuzenle(int Id, Developer developer, IFormFile Image)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (developerId != Id)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            Developer findDeveloper = _developerService.GetDeveloperById(developerId);
+            string guidImageName = Guid.NewGuid().ToString();
+            if (await KurnazFileUploader.UpdateFile(Image, guidImageName, "ImagesDeveloper", guidImageName + Image.FileName, "defaultdeveloper.png") == true)
+            {
+                findDeveloper.Photo = guidImageName + Image.FileName;
+                _developerService.Update(findDeveloper);
+            }
+            else
+            {
+                TempData["UpdateErrorMessage"] = "Fotograf Yüklenme Hatası Oluştu.";
+                return RedirectToAction("FotografDuzenle");
+            }
+
+            TempData["AddSuccessMessage"] = "Fotograf Başarıyla Güncellendi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
 
 
     }
