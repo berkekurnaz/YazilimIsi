@@ -19,6 +19,7 @@ namespace YazilimIsi.WebApp.Controllers
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
         IPortfolioService _portfolioService = new PortfolioManager(new EfPortfolioDal());
         IAwardService _awardService = new AwardManager(new EfAwardDal());
+        IEducationService _educationService = new EducationManager(new EfEducationDal());
 
         IUserService _userService = new UserManager(new EfUserDal());
         IJobService _jobService = new JobManager(new EfJobDal());
@@ -42,6 +43,7 @@ namespace YazilimIsi.WebApp.Controllers
             yazilimciViewModels.LastFiveOffers = _offerService.GetOffersByDeveloperId(developerId).Take(5).ToList();
             yazilimciViewModels.LastFivePortfolio = _portfolioService.GetPortfoliosByDeveloperId(developerId).Take(5).ToList();
             yazilimciViewModels.LastFiveAwards = _awardService.GetAwardsByDeveloperId(developerId).Take(5).ToList();
+            yazilimciViewModels.LastFiveEducations = _educationService.GetEducationsByDeveloperId(developerId).Take(5).ToList();
 
             if (developer.DeveloperSkills.Length > 1 && developer.DeveloperSkills.Contains(","))
             {

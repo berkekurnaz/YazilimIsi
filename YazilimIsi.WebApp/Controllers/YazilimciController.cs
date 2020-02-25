@@ -19,6 +19,7 @@ namespace YazilimIsi.WebApp.Controllers
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
         IPortfolioService _portfolioService = new PortfolioManager(new EfPortfolioDal());
         IAwardService _awardService = new AwardManager(new EfAwardDal());
+        IEducationService _educationService = new EducationManager(new EfEducationDal());
 
         IJobService _jobService = new JobManager(new EfJobDal());
         IOfferService _offerService = new OfferManager(new EfOfferDal());
@@ -215,6 +216,87 @@ namespace YazilimIsi.WebApp.Controllers
             }
             _awardService.Delete(award);
             TempData["AddSuccessMessage"] = "Ödül Silme Başarıyla Gerçekleştirildi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+
+
+        /* Yazilimci Egitimler Listesi */
+        public IActionResult Egitim()
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            List<Education> educations = _educationService.GetEducationsByDeveloperId(developerId);
+            return View(educations);
+        }
+
+        /* Yazilimci Egitim Detay Detayi */
+        public IActionResult EgitimDetay(int Id)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            Education education = _educationService.GetEducationById(Id);
+            if (education == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if (education.DeveloperId != developerId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            return View(education);
+        }
+
+        /* Yazilimci Egitim Ekleme Islemi */
+        [HttpPost]
+        public IActionResult EgitimEkle(YazilimciViewModels yazilimciViewModels)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (yazilimciViewModels.FormEducation.Title.Length > 1 && yazilimciViewModels.FormEducation.Description.Length > 5)
+            {
+                yazilimciViewModels.FormEducation.DeveloperId = developerId;
+                _educationService.Add(yazilimciViewModels.FormEducation);
+            }
+            TempData["AddSuccessMessage"] = "Eğitim Ekleme Başarıyla Gerçekleştirildi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        /* Yazilimci Odul Duzenleme Islemi */
+        [HttpPost]
+        public IActionResult EgitimDuzenle(int Id, Education education)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            Education findEducation = _educationService.GetEducationById(Id);
+            if (findEducation == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if (findEducation.DeveloperId != developerId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            findEducation.Title = education.Title;
+            findEducation.Description = education.Description;
+            findEducation.StartDate = education.StartDate;
+            findEducation.EndDate = education.EndDate;
+            _educationService.Update(findEducation);
+            TempData["AddSuccessMessage"] = "Eğitim Düzenleme Başarıyla Gerçekleştirildi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        /* Yazilimci Egitim Silme Islemi */
+        public IActionResult EgitimSil(int Id)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            Education education = _educationService.GetEducationById(Id);
+            if (education == null)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            if (education.DeveloperId != developerId)
+            {
+                return RedirectToAction("Hata", "Uye");
+            }
+            _educationService.Delete(education);
+            TempData["AddSuccessMessage"] = "Eğitim Silme Başarıyla Gerçekleştirildi.";
             return RedirectToAction("YazilimciProfil", "Uye");
         }
 

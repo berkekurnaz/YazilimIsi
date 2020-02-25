@@ -181,7 +181,7 @@
                         <h3>Kazandığınız Ödüller</h3>
                         <hr />
 
-                        @if (Model.LastFiveAwards.Count> 0)
+                        @if (Model.LastFiveAwards.Count > 0)
                         {
                             @foreach (var item in Model.LastFiveAwards)
                             {
@@ -189,12 +189,36 @@
                             }
                         }
                         else
-                        { 
+                        {
                             <p>Herhangi Bir Ödül Eklenmemiş</p>
                         }
                         <br />
                         <a href="/Yazilimci/Oduller/" class="genric-btn info-border">Tamamını Görüntüle</a>
                         <a href="#" data-toggle="modal" data-target="#modalOdulEkle" class="genric-btn info-border">Yeni Ödül Ekle</a>
+                    </div>
+                </div>
+                <br />
+                <!-- EGITIMLER -->
+                <div class="card">
+                    <div class="card-body">
+
+                        <h3>Eklediğiniz Eğitimler</h3>
+                        <hr />
+
+                        @if (Model.LastFiveEducations.Count > 0)
+                        {
+                            @foreach (var item in Model.LastFiveEducations)
+                            {
+                                <a href="/Yazilimci/EgitimDetay/@item.Id">@item.Title</a><br />
+                            }
+                        }
+                        else
+                        {
+                            <p>Herhangi Bir Eğitim Eklenmemiş</p>
+                        }
+                        <br />
+                        <a href="/Yazilimci/Egitim/" class="genric-btn info-border">Tamamını Görüntüle</a>
+                        <a href="#" data-toggle="modal" data-target="#modalEgitimEkle" class="genric-btn info-border">Yeni Eğitim Ekle</a>
                     </div>
                 </div>
                 <br />
@@ -268,6 +292,43 @@
                         </div>
                         <button type="button" class="genric-btn danger" data-dismiss="modal">Kapat</button>
                         <button type="submit" class="genric-btn info">Yeni Ödül Ekle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Egitim Ekle Modal -->
+<div class="modal fade" id="modalEgitimEkle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yeni Eğitim Ekle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bu Eğitimi Gerçekten Eklemek İstiyor Musun?
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                    <form asp-controller="Yazilimci" asp-action="EgitimEkle" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input asp-for="FormEducation.Title" type="text" class="form-control" placeholder="Eğitim Başlığını Giriniz..." required />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="FormEducation.StartDate" type="text" class="form-control" placeholder="Eğitim Başlangıç Tarihini Giriniz..." required />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="FormEducation.EndDate" type="text" class="form-control" placeholder="Eğitim Bitiş Tarihini Giriniz..." required />
+                        </div>
+                        <div class="form-group">
+                            <textarea asp-for="FormEducation.Description" class="form-control" rows="6" placeholder="Eğitim Açıklamasını Giriniz..." minlength="10" required></textarea>
+                        </div>
+                        <button type="button" class="genric-btn danger" data-dismiss="modal">Kapat</button>
+                        <button type="submit" class="genric-btn info">Yeni Eğitim Ekle</button>
                     </form>
                 </div>
             </div>

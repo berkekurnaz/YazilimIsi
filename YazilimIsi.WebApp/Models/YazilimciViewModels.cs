@@ -11,6 +11,7 @@ namespace YazilimIsi.WebApp.Models
         public Developer Developer { get; set; }
         public List<Offer> LastFiveOffers { get; set; }
         public List<Portfolio> LastFivePortfolio { get; set; }
+        public List<Education> LastFiveEducations { get; set; }
         public List<string> DeveloperSkills { get; set; }
         public List<string> DeveloperAreas { get; set; }
         public List<Award> LastFiveAwards { get; set; }

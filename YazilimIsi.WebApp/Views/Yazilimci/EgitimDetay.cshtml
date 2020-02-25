@@ -1,0 +1,107 @@
+﻿@model YazilimIsi.Entity.Models.Education
+@{
+    ViewData["Title"] = "EgitimDetay";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Eğitim Detayı İnceleme</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Eğitim Detayı</h3>
+                <hr />
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Eğitim Başlık</td>
+                            <td>@Model.Title</td>
+                        </tr>
+                        <tr>
+                            <td>Eğitim Başlangıç Tarihi</td>
+                            <td>@Model.StartDate</td>
+                        </tr>
+                        <tr>
+                            <td>Eğitim Bitiş Tarihi</td>
+                            <td>@Model.EndDate</td>
+                        </tr>
+                        <tr>
+                            <td>Eğitim Alan Geliştirici</td>
+                            <td>@Model.Developer.Name @Model.Developer.Surname</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>Eğitim Açıklama Yazısı</h3>
+                <hr />
+                <p>@Model.Description</p>
+            </div>
+        </div>
+        <br />
+        <div class="card text-center">
+            <div class="card-body">
+                <h3>İşlemler</h3>
+                <hr />
+                <a href="" data-toggle="modal" data-target="#modalEgitimDuzenle" class="genric-btn info-border">Eğitim Düzenle</a><br /><br />
+                <a href="/Yazilimci/EgitimSil/@Model.Id" class="genric-btn danger-border">Eğitim Sil</a><br /><br />
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->
+<!-- Modal -->
+<div class="modal fade" id="modalEgitimDuzenle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eğitim Düzenle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bu Eğitimi Gerçekten Düzenlemek İstiyor Musun?
+            </div>
+            <div class="modal-footer">
+                <div class="container">
+                    <form asp-controller="Yazilimci" asp-action="EgitimDuzenle" asp-route-Id="@Model.Id" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input asp-for="Title" type="text" class="form-control" value="@Model.Title" required />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="StartDate" type="text" class="form-control" value="@Model.StartDate" required />
+                        </div>
+                        <div class="form-group">
+                            <input asp-for="EndDate" type="text" class="form-control" value="@Model.StartDate" required />
+                        </div>
+                        <div class="form-group">
+                            <textarea asp-for="Description" class="form-control" rows="6" minlength="10" required>@Model.Description</textarea>
+                        </div>
+                        <button type="button" class="genric-btn danger" data-dismiss="modal">Kapat</button>
+                        <button type="submit" class="genric-btn info">Eğitim Düzenle</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
