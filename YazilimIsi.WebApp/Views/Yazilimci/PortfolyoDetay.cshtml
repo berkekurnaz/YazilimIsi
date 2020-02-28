@@ -89,7 +89,12 @@
                             <input asp-for="ProjectName" type="text" class="form-control" value="@Model.ProjectName" required />
                         </div>
                         <div class="form-group">
-                            <input asp-for="CreatedDate" type="text" class="form-control" value="@Model.CreatedDate" required />
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" asp-for="CreatedDate" value="@Model.CreatedDate" readonly class="form-control" required>
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <input asp-for="ProjectUrl" type="text" class="form-control" value="@Model.ProjectUrl" required />
@@ -105,3 +110,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            language: 'tr',
+        });
+    });
+</script>

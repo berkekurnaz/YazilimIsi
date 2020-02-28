@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\datapicker\" />
     <Folder Include="wwwroot\ImagesJob\" />
     <Folder Include="wwwroot\ImagesDeveloper\" />
     <Folder Include="wwwroot\SupportFiles\" />
