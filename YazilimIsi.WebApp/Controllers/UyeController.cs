@@ -45,7 +45,7 @@ namespace YazilimIsi.WebApp.Controllers
             yazilimciViewModels.LastFiveAwards = _awardService.GetAwardsByDeveloperId(developerId).Take(5).ToList();
             yazilimciViewModels.LastFiveEducations = _educationService.GetEducationsByDeveloperId(developerId).Take(5).ToList();
 
-            if (developer.DeveloperSkills.Length > 1 && developer.DeveloperSkills.Contains(","))
+            if (developer.DeveloperSkills.Length >= 1)
             {
                 yazilimciViewModels.DeveloperSkills = developer.DeveloperSkills.Split(',').ToList();
             }
@@ -55,7 +55,7 @@ namespace YazilimIsi.WebApp.Controllers
                 yazilimciViewModels.DeveloperSkills = stringlist;
             }
 
-            if (developer.DeveloperAreas.Length > 1 && developer.DeveloperAreas.Contains(","))
+            if (developer.DeveloperAreas.Length >= 1)
             {
                 yazilimciViewModels.DeveloperAreas = developer.DeveloperAreas.Split(',').ToList();
             }

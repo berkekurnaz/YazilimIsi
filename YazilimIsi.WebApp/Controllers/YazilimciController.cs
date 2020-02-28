@@ -219,7 +219,7 @@ namespace YazilimIsi.WebApp.Controllers
             return RedirectToAction("YazilimciProfil", "Uye");
         }
 
-
+        
 
         /* Yazilimci Egitimler Listesi */
         public IActionResult Egitim()
@@ -297,6 +297,152 @@ namespace YazilimIsi.WebApp.Controllers
             }
             _educationService.Delete(education);
             TempData["AddSuccessMessage"] = "Eğitim Silme Başarıyla Gerçekleştirildi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+
+
+        /* Yazilimci Yetenek Ekleme */
+        [HttpPost]
+        public IActionResult YetenekEkle(string yetenek)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (yetenek.Length >= 1 && !yetenek.Contains(','))
+            {
+                Developer developer = _developerService.GetDeveloperById(developerId);
+
+                List<string> skillsList = new List<string>();
+                if (developer.DeveloperSkills.Length >= 1)
+                {
+                    skillsList = developer.DeveloperSkills.Split(',').ToList();
+                }
+                if (skillsList.Count == 0)
+                {
+                    developer.DeveloperSkills += yetenek.ToLower();
+                }
+                else
+                {
+                    developer.DeveloperSkills += "," + yetenek.ToLower();
+                }
+                _developerService.Update(developer);
+            }
+            TempData["AddSuccessMessage"] = "Yetenek Ekleme Başarıyla Gerçekleştirildi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        /* Yazilimci Yetenek Silme */
+        [HttpPost]
+        public IActionResult YetenekSil(string yetenek)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (yetenek.Length >= 1 && !yetenek.Contains(','))
+            {
+                Developer developer = _developerService.GetDeveloperById(developerId);
+
+                List<string> skillsList = new List<string>();
+                if (developer.DeveloperSkills.Length >= 1 && developer.DeveloperSkills.Contains(","))
+                {
+                    skillsList = developer.DeveloperSkills.Split(',').ToList();
+                }
+
+                for (int i = 0; i < skillsList.Count; i++)
+                {
+                    if(skillsList[i] == yetenek)
+                    {
+                        skillsList.RemoveAt(i);
+                    }
+                }
+
+                string newSkillsList = "";
+                for (int i = 0; i < skillsList.Count; i++)
+                {
+                    if(i != 0)
+                    {
+                        newSkillsList += "," + skillsList[i];
+                    }
+                    else
+                    {
+                        newSkillsList += skillsList[i];
+                    }
+                }
+
+                developer.DeveloperSkills = newSkillsList;
+                _developerService.Update(developer);
+            }
+            TempData["AddSuccessMessage"] = "Yetenek Silme Başarıyla Gerçekleştirildi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+
+
+        /* Yazilimci Yetenek Ekleme */
+        [HttpPost]
+        public IActionResult IlgiAlaniEkle(string alan)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (alan.Length >= 1 && !alan.Contains(','))
+            {
+                Developer developer = _developerService.GetDeveloperById(developerId);
+
+                List<string> skillsList = new List<string>();
+                if (developer.DeveloperAreas.Length >= 1)
+                {
+                    skillsList = developer.DeveloperAreas.Split(',').ToList();
+                }
+                if (skillsList.Count == 0)
+                {
+                    developer.DeveloperAreas += alan;
+                }
+                else
+                {
+                    developer.DeveloperAreas += "," + alan;
+                }
+                _developerService.Update(developer);
+            }
+            TempData["AddSuccessMessage"] = "İlgi Alanı Ekleme Başarıyla Gerçekleştirildi.";
+            return RedirectToAction("YazilimciProfil", "Uye");
+        }
+
+        /* Yazilimci Yetenek Silme */
+        [HttpPost]
+        public IActionResult IlgiAlaniSil(string alan)
+        {
+            int developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+            if (alan.Length >= 1 && !alan.Contains(','))
+            {
+                Developer developer = _developerService.GetDeveloperById(developerId);
+
+                List<string> skillsList = new List<string>();
+                if (developer.DeveloperAreas.Length >= 1 && developer.DeveloperAreas.Contains(","))
+                {
+                    skillsList = developer.DeveloperAreas.Split(',').ToList();
+                }
+
+                for (int i = 0; i < skillsList.Count; i++)
+                {
+                    if (skillsList[i] == alan)
+                    {
+                        skillsList.RemoveAt(i);
+                    }
+                }
+
+                string newSkillsList = "";
+                for (int i = 0; i < skillsList.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        newSkillsList += "," + skillsList[i];
+                    }
+                    else
+                    {
+                        newSkillsList += skillsList[i];
+                    }
+                }
+
+                developer.DeveloperAreas = newSkillsList;
+                _developerService.Update(developer);
+            }
+            TempData["AddSuccessMessage"] = "İlgi Alanı Silme Başarıyla Gerçekleştirildi.";
             return RedirectToAction("YazilimciProfil", "Uye");
         }
 
