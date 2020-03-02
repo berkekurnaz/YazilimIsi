@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using YazilimIsi.Business.Abstract;
 using YazilimIsi.DataAccess.Abstract;
@@ -29,7 +30,7 @@ namespace YazilimIsi.Business.Concrete
 
         public List<Job> GetAllJobs()
         {
-            return _jobDal.GetAll();
+            return _jobDal.GetAll().OrderByDescending(x => x.Id).ToList();
         }
 
         public Job GetJobById(int Id)

@@ -1,0 +1,176 @@
+﻿@model YazilimIsi.WebApp.Models.AnasayfaIslerViewModel
+@{
+    ViewData["Title"] = "Isler";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>158 Yazılım İşi Bekliyor</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<div class="job_listing_area plus_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="job_filter white-bg">
+                    <div class="form_inner white-bg">
+                        <h3>Filtreleme</h3>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <input type="text" placeholder="Anahtar Kelime">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <select class="wide" style="display: none;">
+                                            <option data-display="Şehir">Şehir</option>
+                                            <option value="1">İstanbul</option>
+                                            <option value="2">Balıkesir</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <select class="wide" style="display: none;">
+                                            <option data-display="Kategori">Kategori</option>
+                                            <option value="1">Category 1</option>
+                                            <option value="2">Category 2 </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="single_field">
+                                        <select class="wide" style="display: none;">
+                                            <option data-display="Deneyim">Deneyim</option>
+                                            <option value="1">Intern</option>
+                                            <option value="2">Junior</option>
+                                            <option value="3">Senior</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="range_wrap">
+                        <label for="amount">Zaman Aralığı:</label>
+                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
+                        </div>
+                        <p>
+                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                        </p>
+                    </div>
+                    <div class="range_wrap">
+                        <label for="amount">Fiyat Aralığı:</label>
+                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
+                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
+                        </div>
+                        <p>
+                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                        </p>
+                    </div>
+                    <div class="reset_btn">
+                        <button class="boxed-btn3 w-100" type="submit">Yazılım İşi Ara</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="recent_joblist_wrap">
+                    <div class="recent_joblist white-bg ">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <h4>Yazılım İşleri Listesi</h4>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="serch_cat d-flex justify-content-end">
+                                    <select style="display: none;">
+                                        <option data-display="Son Eklenenler">Son Eklenenler</option>
+                                        <option value="1">Çok Görüntülenenler</option>
+                                        <option value="2">Ücreti En Yüksek</option>
+                                        <option value="4">Zaman Aralığı En Yüksek</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="job_lists m-0">
+                    <div class="row">
+
+                        @if (Model.Jobs.Count() > 0)
+                        {
+                            <!-- Yazılım İşi Start -->
+                            @foreach (var item in Model.Jobs)
+                            {
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="single_jobs white-bg d-flex justify-content-between">
+                                        <div class="jobs_left d-flex align-items-center">
+                                            <div class="thumb">
+                                                <img src="~/img/svg_icon/1.svg" alt="">
+                                            </div>
+                                            <div class="jobs_conetent">
+                                                <a href="/Anasayfa/IsDetay/@item.Id"><h4 style="font-size:22px;">@item.Title</h4></a>
+                                                <div class="links_locat d-flex align-items-center">
+                                                    <div class="location">
+                                                        <p> <i class="fa fa-map-marker"></i> @item.Location / Türkiye</p>
+                                                    </div>
+
+                                                    <div class="location">
+                                                        <p> <i class="fa fa-clock-o"></i> @item.Category</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="jobs_right">
+                                            <div class="apply_now">
+                                                <a class="heart_mark" href="#"> <i class="fa fa-heart"></i> </a>
+                                                <a href="/Anasayfa/IsDetay/@item.Id" class="boxed-btn3">Hemen İncele</a>
+                                            </div>
+                                            <div class="date">
+                                                <p>Eklenme Tarihi: @Convert.ToDateTime(item.CreatedDate).ToShortDateString()</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <!-- Yazılım İşi End -->
+                        }
+                        else
+                        {
+                            <p>Bulunamadı...</p>
+                        }
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="pagination_wrap">
+                                <ul>
+                                    <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                                    <li><a href="#"><span>01</span></a></li>
+                                    <li><a href="#"><span>02</span></a></li>
+                                    <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

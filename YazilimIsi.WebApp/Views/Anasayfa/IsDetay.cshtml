@@ -1,0 +1,125 @@
+﻿@model YazilimIsi.WebApp.Models.AnasayfaIslerViewModel
+@{
+    ViewData["Title"] = "IsDetay";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>@Model.Job.Title</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="job_details_header">
+                    <div class="single_jobs white-bg d-flex justify-content-between">
+                        <div class="jobs_left d-flex align-items-center">
+                            <div class="thumb">
+                                <img src="~/ImagesJob/@Model.Job.Photo" style="object-fit:cover;height:100%" alt="">
+                            </div>
+                            <div class="jobs_conetent">
+                                <a href="#"><h4>@Model.Job.Title</h4></a>
+                                <div class="links_locat d-flex align-items-center">
+                                    <div class="location">
+                                        <p> <i class="fa fa-map-marker"></i> @Model.Job.Location / Türkiye</p>
+                                    </div>
+                                    <div class="location">
+                                        <p> <i class="fa fa-clock-o"></i> @Model.Job.Category</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jobs_right">
+                            <div class="apply_now">
+                                <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="descript_wrap white-bg">
+                    <div class="single_wrap">
+                        @Html.Raw(Model.Job.Description)
+                    </div>
+                </div>
+                <div class="apply_job_form white-bg">
+                    <h4>Bu İşe Teklif Yap</h4>
+                    <form action="#">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <input type="text" placeholder="Fiyat Teklifiniz...">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input_field">
+                                    <input type="text" placeholder="Tamamlama Gününüz...">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input_field">
+                                    <textarea name="#" id="" cols="30" rows="10" placeholder="Açıklama Yazınız..."></textarea>
+                                </div>
+                                <center><small>* Lütfen Burada Doğru Değerler Girdiğinizden Emin Olun.</small></center>
+                                <br />
+                            </div>
+                            <div class="col-md-12">
+                                <div class="submit_btn">
+                                    <button class="boxed-btn3 w-100" type="submit">Teklifi Yap</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="job_sumary">
+                    <div class="summery_header">
+                        <h3>İş Özeti</h3>
+                    </div>
+                    <div class="job_content">
+                        <ul>
+                            <li>Yayınlanma Tarihi: <span>@Convert.ToDateTime(Model.Job.CreatedDate).ToShortDateString()</span></li>
+                            <li>Fiyat: <span>@Model.Job.Price TL</span></li>
+                            <li>Tamamlanma Günü: <span>@Model.Job.Time Gün</span></li>
+                            <li>Konum: <span>@Model.Job.Location</span></li>
+                            <li>Kategori: <span>@Model.Job.Category</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="share_wrap d-flex">
+                    <span>Paylaş:</span>
+                    <ul>
+                        <li><a href="#"> <i class="fa fa-facebook"></i></a> </li>
+                        <li><a href="#"> <i class="fa fa-google-plus"></i></a> </li>
+                        <li><a href="#"> <i class="fa fa-twitter"></i></a> </li>
+                        <li><a href="#"> <i class="fa fa-envelope"></i></a> </li>
+                    </ul>
+                </div>
+                <div class="job_sumary">
+                    <div class="summery_header">
+                        <h3>İstatistikler</h3>
+                    </div>
+                    <div class="job_content">
+                        <ul>
+                            <li>Teklif Sayısı: <span>5</span></li>
+                            <li>Ortalama Fiyat: <span>1500 TL</span></li>
+                            <li>En Düşük Fiyat: <span>1200 TL</span></li>
+                            <li>En Yüksek Fiyat: <span>2000 TL</span></li>
+                            <li>Ortalama Süre: <span>15 Gün</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
