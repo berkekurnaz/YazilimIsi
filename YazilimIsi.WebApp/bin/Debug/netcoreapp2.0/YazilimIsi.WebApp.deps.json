@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "e7b1c5ad0eda7a95dda251e355dc791b2b41231c"
+    "signature": "9490017549e2e1f0605da0bcb5f6c1a7f0e07f57"
   },
   "compilationOptions": {
     "defines": [
@@ -26,6 +26,7 @@
           "Microsoft.AspNetCore.All": "2.0.8",
           "Microsoft.NETCore.App": "2.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.3",
+          "ReflectionIT.Mvc.Paging": "2.4.0",
           "YazilimIsi.Business": "1.0.0",
           "YazilimIsi.Entity": "1.0.0",
           "YazilimIsi.HelperFileUploader": "1.0.0"
@@ -2587,6 +2588,23 @@
         },
         "compile": {
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
+        }
+      },
+      "ReflectionIT.Analyzer/1.1.0": {},
+      "ReflectionIT.Mvc.Paging/2.4.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.0.4",
+          "Microsoft.AspNetCore.Mvc.Razor": "2.0.4",
+          "Microsoft.EntityFrameworkCore.Relational": "3.1.1",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.0.1",
+          "Microsoft.Extensions.Options": "3.1.1",
+          "ReflectionIT.Analyzer": "1.1.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {}
+        },
+        "compile": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {}
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -5697,6 +5715,20 @@
       "sha512": "sha512-WCkN68c8q+USG+Ot1MmBDH+9DUo5dk7UB0QDMiwCYhrH7ZoFLKFGGNzJ8C3LTR1DvB1LW9BOxKeznnZznKiCTA==",
       "path": "nuget.frameworks/4.0.0",
       "hashPath": "nuget.frameworks.4.0.0.nupkg.sha512"
+    },
+    "ReflectionIT.Analyzer/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9ghL2hDLhWnAO+21dCqHTbu8FKuewArWwT7P5XFPhWFonIgI0/3Fu1IusZ2eH9wxtXQ+ei4O35kfd92MSJ/bwg==",
+      "path": "reflectionit.analyzer/1.1.0",
+      "hashPath": "reflectionit.analyzer.1.1.0.nupkg.sha512"
+    },
+    "ReflectionIT.Mvc.Paging/2.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-5yYpGKssVkmOhiJZNlZj6xspNh2ICCvbLuSve6OgdUYqStqy4dk56A/k9J7mvB/38s8qKAicLG3q08r8h9EOUA==",
+      "path": "reflectionit.mvc.paging/2.4.0",
+      "hashPath": "reflectionit.mvc.paging.2.4.0.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

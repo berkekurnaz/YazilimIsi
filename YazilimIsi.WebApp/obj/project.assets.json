@@ -2982,6 +2982,26 @@
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
         }
       },
+      "ReflectionIT.Analyzer/1.1.0": {
+        "type": "package"
+      },
+      "ReflectionIT.Mvc.Paging/2.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.0.1",
+          "Microsoft.AspNetCore.Mvc.Razor": "2.0.1",
+          "Microsoft.EntityFrameworkCore.Relational": "2.0.1",
+          "Microsoft.Extensions.FileProviders.Embedded": "2.0.0",
+          "Microsoft.Extensions.Options": "2.0.0",
+          "ReflectionIT.Analyzer": "1.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll": {}
+        }
+      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -8545,6 +8565,30 @@
         "nuget.frameworks.nuspec"
       ]
     },
+    "ReflectionIT.Analyzer/1.1.0": {
+      "sha512": "9ghL2hDLhWnAO+21dCqHTbu8FKuewArWwT7P5XFPhWFonIgI0/3Fu1IusZ2eH9wxtXQ+ei4O35kfd92MSJ/bwg==",
+      "type": "package",
+      "path": "reflectionit.analyzer/1.1.0",
+      "files": [
+        ".signature.p7s",
+        "analyzers/dotnet/cs/ReflectionITAnalyzer.dll",
+        "reflectionit.analyzer.1.1.0.nupkg.sha512",
+        "reflectionit.analyzer.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "ReflectionIT.Mvc.Paging/2.4.0": {
+      "sha512": "5yYpGKssVkmOhiJZNlZj6xspNh2ICCvbLuSve6OgdUYqStqy4dk56A/k9J7mvB/38s8qKAicLG3q08r8h9EOUA==",
+      "type": "package",
+      "path": "reflectionit.mvc.paging/2.4.0",
+      "files": [
+        ".signature.p7s",
+        "lib/netstandard2.0/ReflectionIT.Mvc.Paging.dll",
+        "reflectionit.mvc.paging.2.4.0.nupkg.sha512",
+        "reflectionit.mvc.paging.nuspec"
+      ]
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "sha512": "HdSSp5MnJSsg08KMfZThpuLPJpPwE5hBXvHwoKWosyHHfe8Mh5WKT0ylEOf6yNzX6Ngjxe4Whkafh5q7Ymac4Q==",
       "type": "package",
@@ -13790,6 +13834,7 @@
       "Microsoft.AspNetCore.All >= 2.0.8",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.3",
+      "ReflectionIT.Mvc.Paging >= 2.4.0",
       "YazilimIsi.Business >= 1.0.0",
       "YazilimIsi.Entity >= 1.0.0",
       "YazilimIsi.HelperFileUploader >= 1.0.0"
@@ -13858,6 +13903,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[2.0.3, )"
+          },
+          "ReflectionIT.Mvc.Paging": {
+            "target": "Package",
+            "version": "[2.4.0, )"
           }
         },
         "imports": [

@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using ReflectionIT.Mvc.Paging;
 using YazilimIsi.Entity.Models;
 
 namespace YazilimIsi.WebApp
@@ -35,6 +36,8 @@ namespace YazilimIsi.WebApp
             services.AddSingleton<IFileProvider>(physicalProvider);
             services.AddSession();
             services.AddMvc();
+
+            services.AddPaging();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

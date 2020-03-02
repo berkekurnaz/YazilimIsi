@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ReflectionIT.Mvc.Paging;
 using YazilimIsi.Business.Abstract;
 using YazilimIsi.Business.Concrete;
 using YazilimIsi.DataAccess.Concrete;
@@ -73,13 +74,13 @@ namespace YazilimIsi.WebApp.Controllers
 
 
         /* Anasayfa Yazilim Isleri Sayfasi */
-        public IActionResult Isler()
+        public IActionResult Isler(int sayfa=1)
         {
             List<Job> jobs = _jobService.GetAllJobs();
             AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
-            anasayfaIslerViewModel.Jobs = jobs;
+            anasayfaIslerViewModel.Jobs = PagingList.Create(jobs, 5, sayfa);
 
-            // ToDo : Sayfalama Yapilacak.
+            anasayfaIslerViewModel.MyPagingModel = PagingList.Create(jobs, 5, sayfa);
 
             return View(anasayfaIslerViewModel);
         }
