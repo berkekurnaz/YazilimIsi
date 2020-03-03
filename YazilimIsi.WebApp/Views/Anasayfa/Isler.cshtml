@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div classNedir="bradcam_text">
-                    <h3>158 Yazılım İşi Bekliyor</h3>
+                    <h3>158 Yazılım İşi Bekliyor  @ViewBag.tes01</h3>
                 </div>
             </div>
         </div>
@@ -28,69 +28,81 @@
                 <div class="job_filter white-bg">
                     <div class="form_inner white-bg">
                         <h3>Filtreleme</h3>
-                        <form action="#">
+                        <form asp-controller="Anasayfa" asp-action="Isler" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="single_field">
-                                        <input type="text" placeholder="Anahtar Kelime">
+                                        <input id="key" name="key" type="text" value="@ViewBag.JobSearchKey" placeholder="Anahtar Kelime">
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="single_field">
-                                        <select class="wide" style="display: none;">
-                                            <option data-display="Şehir">Şehir</option>
-                                            <option value="1">İstanbul</option>
-                                            <option value="2">Balıkesir</option>
+                                        <select id="city" name="city" class="wide" style="display: none;">
+                                            @if (ViewBag.JobSearchCity != null)
+	                                        {
+                                                <option>@ViewBag.JobSearchCity</option>
+	                                        }
+                                            <option>Bütün Konumlar</option>
+                                            <option>İstanbul</option>
+                                            <option>Balıkesir</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="single_field">
-                                        <select class="wide" style="display: none;">
-                                            <option data-display="Kategori">Kategori</option>
-                                            <option value="1">Category 1</option>
-                                            <option value="2">Category 2 </option>
+                                        <select id="category" name="category" class="wide" style="display: none;">
+                                            @if (ViewBag.JobSearchCategory != null)
+                                            {
+                                                <option>@ViewBag.JobSearchCategory</option>
+                                            }
+                                            <option>Bütün İlanlar</option>
+                                            <option>Tüm Yazılım Kategorisi</option>
+                                            <option>Frontend Yazılım</option>
+                                            <option>Backend Yazılım</option>
+                                            <option>Full Stack Yazılım</option>
+                                            <option>Mobil Uygulama Geliştirme</option>
+                                            <option>Masaüstü Uygulama Geliştirme</option>
+                                            <option>Gömülü Sistem Yazılımı</option>
+                                            <option>Veritabanı Programcılığı</option>
+                                            <option>Oyun Geliştirme</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="single_field">
-                                        <select class="wide" style="display: none;">
-                                            <option data-display="Deneyim">Deneyim</option>
-                                            <option value="1">Intern</option>
-                                            <option value="2">Junior</option>
-                                            <option value="3">Senior</option>
-                                        </select>
+                                    <div class="range_wrap">
+                                        <label for="amount">Zaman Aralığı:</label>
+                                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
+                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
+                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
+                                        </div>
+                                        <p>
+                                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="range_wrap">
+                                        <label for="amount">Fiyat Aralığı:</label>
+                                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
+                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
+                                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
+                                        </div>
+                                        <p>
+                                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="reset_btn">
+                                        <button class="boxed-btn3 w-100" type="submit">Yazılım İşi Ara</button>
                                     </div>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="range_wrap">
-                        <label for="amount">Zaman Aralığı:</label>
-                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
-                        </div>
-                        <p>
-                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
-                        </p>
-                    </div>
-                    <div class="range_wrap">
-                        <label for="amount">Fiyat Aralığı:</label>
-                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                            <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
-                            <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
-                        </div>
-                        <p>
-                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
-                        </p>
-                    </div>
-                    <div class="reset_btn">
-                        <button class="boxed-btn3 w-100" type="submit">Yazılım İşi Ara</button>
-                    </div>
+
                 </div>
             </div>
             <div class="col-lg-9">
@@ -169,12 +181,29 @@
                         <div class="col-lg-12">
                             <div class="pagination_wrap">
                                 <ul>
-                                    <li><a href="#"> <i class="ti-angle-left"></i> </a></li>
+                                    @{ 
+                                        string anahtar = "";
+                                        string sehir = "";
+                                        string kategori = "";
+                                        if (ViewBag.JobSearchKey != null)
+                                        {
+                                            anahtar = ViewBag.JobSearchKey;
+                                        }
+                                        if (ViewBag.JobSearchCity != null)
+                                        {
+                                            sehir = ViewBag.JobSearchCity;
+                                        }
+                                        if (ViewBag.JobSearchCategory != null)
+                                        {
+                                            kategori = ViewBag.JobSearchCategory;
+                                        }
+                                    }
+                                    <li><a href="@Url.Action("Isler", new { sayfa = Model.MyPagingModel.PageIndex - 1, sehir = sehir, anahtar=anahtar, kategori = kategori })"> <i class="ti-angle-left"></i> </a></li>
                                     @for (var p = 1; p <= Model.MyPagingModel.PageCount; p++)
                                     {                          
-                                        <li><a href="@Url.Action("Isler", new { sayfa = p })"><span>@p</span></a></li>
+                                        <li><a href="@Url.Action("Isler", new { sayfa = p, sehir = sehir, anahtar=anahtar, kategori = kategori })"><span>@p</span></a></li>
                                     }
-                                    <li><a href="#"> <i class="ti-angle-right"></i> </a></li>
+                                    <li><a href="@Url.Action("Isler", new { sayfa = Model.MyPagingModel.PageIndex + 1, sehir = sehir, anahtar=anahtar, kategori = kategori })"> <i class="ti-angle-right"></i> </a></li>
                                 </ul>
                             </div>
                         </div>

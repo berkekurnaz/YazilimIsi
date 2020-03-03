@@ -74,34 +74,69 @@ namespace YazilimIsi.WebApp.Controllers
 
 
         /* Anasayfa Yazilim Isleri Sayfasi */
-        public IActionResult Isler(int sayfa=1)
+        public IActionResult Isler(int sayfa=1, [FromQuery] string sehir = null, [FromQuery] string anahtar = null, [FromQuery] string kategori = null, [FromQuery] string type = null)
         {
             List<Job> jobs = _jobService.GetAllJobs();
             AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
-            anasayfaIslerViewModel.Jobs = PagingList.Create(jobs, 5, sayfa);
+            if (anahtar != null)
+            {
+                ViewBag.JobSearchKey = anahtar;
+                jobs = jobs.Where(x => x.Title.Contains(anahtar)).ToList();
+            }
+            if (sehir != null)
+            {
+                if (sehir != "Bütün Konumlar")
+                {
+                    ViewBag.JobSearchCity = sehir;
+                    jobs = jobs.Where(x => x.Location == sehir).ToList();
+                }
+            }
+            if (kategori != null)
+            {
+                if (kategori != "Bütün İlanlar")
+                {
+                    ViewBag.JobSearchCategory = kategori;
+                    jobs = jobs.Where(x => x.Category == kategori).ToList();
+                }
+            }
 
-            anasayfaIslerViewModel.MyPagingModel = PagingList.Create(jobs, 5, sayfa);
+
+            anasayfaIslerViewModel.Jobs = PagingList.Create(jobs, 10, sayfa);
+
+            anasayfaIslerViewModel.MyPagingModel = PagingList.Create(jobs, 10, sayfa);
 
             return View(anasayfaIslerViewModel);
         }
         [HttpPost]
-        public IActionResult Isler([FromQuery] string sehir, [FromQuery] string key, [FromQuery] string category)
+        public IActionResult Isler(int sayfa = 1, string city = null, string key =null, string category=null)
         {
             List<Job> jobs = _jobService.GetAllJobs();
-            if (sehir != null)
+            if (key != null)
             {
-                jobs = jobs.Where(x => x.Location == sehir).ToList();
+                ViewBag.JobSearchKey = key;
+                jobs = jobs.Where(x => x.Title.Contains(key)).ToList();
+            }
+            if (city != null)
+            {
+                if (city != "Bütün Konumlar")
+                {
+                    ViewBag.JobSearchCity= city;
+                    jobs = jobs.Where(x => x.Location == city).ToList();
+                }
             }
             if (category != null)
             {
-                jobs = jobs.Where(x => x.Category == category).ToList();
-            }
-            if (key != null)
-            {
-                jobs = jobs.Where(x => x.Title.Contains(key)).ToList();
+                if (category != "Bütün İlanlar")
+                {
+                    ViewBag.JobSearchCategory = category;
+                    jobs = jobs.Where(x => x.Category == category).ToList();
+                }
             }
             AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
-            anasayfaIslerViewModel.Jobs = jobs;
+            anasayfaIslerViewModel.Jobs = PagingList.Create(jobs, 10, sayfa);
+
+            anasayfaIslerViewModel.MyPagingModel = PagingList.Create(jobs, 10, sayfa);
+
             return View(anasayfaIslerViewModel);
         }
 

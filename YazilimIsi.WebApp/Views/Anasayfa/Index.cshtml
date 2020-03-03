@@ -32,47 +32,62 @@
         <div class="row cat_search">
             <div class="col-lg-3 col-md-4">
                 <div class="single_input">
-                    <input type="text" placeholder="Anahtar Kelime...">
+                    <input id="selectKey" type="text" placeholder="Anahtar Kelime...">
                 </div>
             </div>
             <div class="col-lg-3 col-md-4">
                 <div class="single_input">
-                    <select class="wide">
-                        <option data-display="Şehir">Şehir</option>
-                        <option value="1">Dhaka</option>
-                        <option value="2">Rangpur</option>
-                        <option value="4">Sylet</option>
+                    <select id="selectLocation" class="wide">
+                        <option>Bütün Konumlar</option>
+                        <option>İstanbul</option>
+                        <option>Balıkesir</option>
                     </select>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4">
                 <div class="single_input">
-                    <select class="wide">
-                        <option data-display="Kategori">Kategori</option>
-                        <option value="1">Category 1</option>
-                        <option value="2">Category 2</option>
-                        <option value="4">Category 3</option>
+                    <select id="selectCategory" class="wide">
+                        <option>Bütün İlanlar</option>
+                        <option>Tüm Yazılım Kategorisi</option>
+                        <option>Frontend Yazılım</option>
+                        <option>Backend Yazılım</option>
+                        <option>Full Stack Yazılım</option>
+                        <option>Mobil Uygulama Geliştirme</option>
+                        <option>Masaüstü Uygulama Geliştirme</option>
+                        <option>Gömülü Sistem Yazılımı</option>
+                        <option>Veritabanı Programcılığı</option>
+                        <option>Oyun Geliştirme</option>
                     </select>
                 </div>
             </div>
             <div class="col-lg-3 col-md-12">
                 <div class="job_btn">
-                    <a href="#" class="boxed-btn3">Yazılım İşi Bul</a>
+                    <button id="btnFindJob" onclick="findJob()" class="boxed-btn3">Yazılım İşi Bul</button>
                 </div>
             </div>
+            
+            <script>
+                function findJob() {
+                    var selectKey = document.getElementById("selectKey").value;
+                    var selectLocation = document.getElementById("selectLocation").value;
+                    var selectCategory = document.getElementById("selectCategory").value;
+
+                    var url = "/Anasayfa/Isler?sehir=" + selectLocation + "&kategori=" + selectCategory + "&anahtar=" + selectKey;
+
+                    window.open(url, "_self");
+                }
+            </script>
+
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="popular_search d-flex align-items-center">
-                    <span>Popüler Aramalar:</span>
+                    <span>Popüler Arama Kategorileri :</span>
                     <ul>
-                        <li><a href="#">Design & Creative</a></li>
-                        <li><a href="#">Marketing</a></li>
-                        <li><a href="#">Administration</a></li>
-                        <li><a href="#">Teaching & Education</a></li>
-                        <li><a href="#">Engineering</a></li>
-                        <li><a href="#">Software & Web</a></li>
-                        <li><a href="#">Telemarketing</a></li>
+                        <li><a href="#">Full Stack Yazılım</a></li>
+                        <li><a href="#">Mobil Uygulama Geliştirme</a></li>
+                        <li><a href="#">Masaüstü Uygulama Geliştirme</a></li>
+                        <li><a href="#">Oyun Geliştirme</a></li>
                     </ul>
                 </div>
             </div>
@@ -93,50 +108,50 @@
         <div class="row">
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Design & Creative</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Bütün İlanlar</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Marketing</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Genel Yazılım</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Telemarketing</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Frontend Yazılım</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Software & Web</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Backend Yazılım</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Administration</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Full Stack Yazılım Kategorisi</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Teaching & Education</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Mobil Uygulama Geliştirme</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Engineering</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Masaüstü Uygulama Geliştirme</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
             <div class="col-lg-4 col-xl-3 col-md-6">
                 <div class="single_catagory">
-                    <a href="jobs.html"><h4>Garments / Textile</h4></a>
-                    <p> <span>50</span> Available position</p>
+                    <a href="jobs.html"><h4>Oyun Geliştirme Kategorisi</h4></a>
+                    <p> <span>50</span> Bekleyen İlan</p>
                 </div>
             </div>
         </div>
@@ -154,7 +169,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="brouse_job text-right">
-                    <a href="jobs.html" class="boxed-btn4">Bütün İşleri Görüntüle</a>
+                    <a href="/Anasayfa/Isler/" class="boxed-btn4">Bütün İşleri Görüntüle</a>
                 </div>
             </div>
         </div>
@@ -444,6 +459,7 @@
                         <p>Software Engineer</p>
                     </div>
                 </div>
+                <center><small>* Rastgele 10 Yazılımcı Bu Alanda Gösterilir.</small></center>
             </div>
         </div>
     </div>
@@ -455,7 +471,7 @@
         <div class="row align-items-center mb-40">
             <div class="col-lg-6 col-md-6">
                 <div class="section_title">
-                    <h3>Kendine Yazılım İşi Bul</h3>
+                    <h3>Kendine Tam Zamanlı Yazılım İşi Bul</h3>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
