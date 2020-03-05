@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReflectionIT.Mvc.Paging;
 using YazilimIsi.Business.Abstract;
@@ -18,6 +19,7 @@ namespace YazilimIsi.WebApp.Controllers
         IContactService _contactService = new ContactManager(new EfContactDal());
         IJobService _jobService = new JobManager(new EfJobDal());
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
+        IOfferService _offerService = new OfferManager(new EfOfferDal());
 
         /* Anasayfa Index Sayfasi */
         public IActionResult Index()
@@ -80,8 +82,9 @@ namespace YazilimIsi.WebApp.Controllers
             AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
             if (anahtar != null)
             {
+                anahtar = anahtar.ToLower();
                 ViewBag.JobSearchKey = anahtar;
-                jobs = jobs.Where(x => x.Title.Contains(anahtar)).ToList();
+                jobs = jobs.Where(x => x.Title.ToLower().Contains(anahtar)).ToList();
             }
             if (sehir != null)
             {
@@ -113,8 +116,9 @@ namespace YazilimIsi.WebApp.Controllers
             List<Job> jobs = _jobService.GetAllJobs();
             if (key != null)
             {
+                key = key.ToLower();
                 ViewBag.JobSearchKey = key;
-                jobs = jobs.Where(x => x.Title.Contains(key)).ToList();
+                jobs = jobs.Where(x => x.Title.ToLower().Contains(key)).ToList();
             }
             if (city != null)
             {
@@ -143,20 +147,88 @@ namespace YazilimIsi.WebApp.Controllers
         /* Anasayfa Yazilim Isi Detay Sayfasi */
         public IActionResult IsDetay(int Id)
         {
+            AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
+
             Job job = _jobService.GetJobById(Id);
             if (job == null)
             {
                 return RedirectToAction("Hata");
             }
-            AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
+
+            int developerId;
+            if (HttpContext.Session.GetString("SessionDeveloperId") != null)
+            {
+                developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+                anasayfaIslerViewModel.Developer = _developerService.GetDeveloperById(developerId);
+
+                /* Yazilimci Daha Once Teklif Vermis Mi Bulma Islemi */
+                List<Offer> offerList = _offerService.GetOffersByJobId(Id);
+                foreach (var item in offerList)
+                {
+                    if(item.DeveloperId == developerId)
+                    {
+                        anasayfaIslerViewModel.DeveloperOffer = item;
+                    }
+                }
+
+            }
+
             anasayfaIslerViewModel.Job = job;
             return View(anasayfaIslerViewModel);
         }
 
+        /* Anasayfa Yazilimci Teklif Yapma Islemi */
+        public IActionResult TeklifYap(int Id, AnasayfaIslerViewModel anasayfaIslerViewModel)
+        {
+            int developerId;
+            if (HttpContext.Session.GetString("SessionDeveloperId") != null)
+            {
+                developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+                bool flag = true;
+                foreach (var item in _offerService.GetOffersByJobId(Id))
+                {
+                    if (item.DeveloperId == developerId)
+                    {
+                        flag = false;
+                    }
+                }
+                if (flag == true)
+                {
+                    Offer offer = anasayfaIslerViewModel.Offer;
+                    offer.CreatedDate = DateTime.Now;
+                    offer.JobId = Id;
+                    offer.DeveloperId = developerId;
+                    TempData["OfferMessage"] = "Başarılı Bir Şekilde Teklif Verdiniz.";
+                    _offerService.Add(offer);
+                }
+                else
+                {
 
+                }
+            }
+            return RedirectToAction("IsDetay", new { Id = Id });
+        }
 
-
-
+        /* Anasayfa Yazilimci Teklif Duzenleme Islemi */
+        public IActionResult TeklifDuzenle(int Id, int JobId, AnasayfaIslerViewModel anasayfaIslerViewModel)
+        {
+            int developerId;
+            if (HttpContext.Session.GetString("SessionDeveloperId") != null)
+            {
+                developerId = Convert.ToInt32(HttpContext.Session.GetString("SessionDeveloperId"));
+                Offer findOffer = _offerService.GetOfferById(Id);
+                if (findOffer == null)
+                {
+                    return RedirectToAction("Hata");
+                }
+                findOffer.Price = anasayfaIslerViewModel.DeveloperOffer.Price;
+                findOffer.Time = anasayfaIslerViewModel.DeveloperOffer.Time;
+                findOffer.Description = anasayfaIslerViewModel.DeveloperOffer.Description;
+                TempData["OfferMessage"] = "Başarılı Bir Şekilde Teklifi Güncellediniz.";
+                _offerService.Update(findOffer);
+            }
+            return RedirectToAction("IsDetay", new { Id = JobId });
+        }
 
 
     }

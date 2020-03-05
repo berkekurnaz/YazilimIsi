@@ -20,6 +20,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+                @if (TempData["OfferMessage"] != null)
+                {
+                    <blockquote class="generic-blockquote">@TempData["OfferMessage"]</blockquote>
+                }
                 <div class="job_details_header">
                     <div class="single_jobs white-bg d-flex justify-content-between">
                         <div class="jobs_left d-flex align-items-center">
@@ -51,33 +55,81 @@
                     </div>
                 </div>
                 <div class="apply_job_form white-bg">
-                    <h4>Bu İşe Teklif Yap</h4>
-                    <form action="#">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="input_field">
-                                    <input type="text" placeholder="Fiyat Teklifiniz...">
+                    @if (Model.Developer != null)
+                    {
+                        if (Model.DeveloperOffer != null)
+                        {
+                            <h4>Teklifini Düzenle</h4>
+                            <hr />
+                            <small>* Daha Önce Bu İşe Teklif Vermişsin.</small><br /><br />
+                            <form asp-controller="Anasayfa" asp-action="TeklifDuzenle" asp-route-Id="@Model.DeveloperOffer.Id" asp-route-JobId="@Model.Job.Id" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input_field">
+                                            <label>Fiyat Teklifi</label>
+                                            <input type="number" asp-for="@Model.DeveloperOffer.Price" value="@Model.DeveloperOffer.Price" placeholder="Fiyat Teklifiniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input_field">
+                                            <label>Tamamlama Günü</label>
+                                            <input type="number" asp-for="@Model.DeveloperOffer.Time" value="@Model.DeveloperOffer.Time" placeholder="Tamamlama Gününüz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input_field">
+                                            <label>Açıklama Yazısı</label>
+                                            <textarea cols="30" rows="10" asp-for="@Model.DeveloperOffer.Description" value="@Model.DeveloperOffer.Description" placeholder="Teklifle İlgili Açıklama Yazınız..."></textarea>
+                                        </div>
+                                        <center><small>* Lütfen Burada Doğru Değerler Girdiğinizden Emin Olun.</small></center>
+                                        <br />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="submit_btn">
+                                            <button class="boxed-btn3 w-100" type="submit">Teklifi Düzenle</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="input_field">
-                                    <input type="text" placeholder="Tamamlama Gününüz...">
+                            </form>
+                        }
+                        else
+                        {
+                            <h4>Bu İşe Teklif Yap</h4>
+                            <form asp-controller="Anasayfa" asp-action="TeklifYap" asp-route-Id="@Model.Job.Id" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input_field">
+                                            <input type="number" asp-for="Offer.Price" placeholder="Fiyat Teklifiniz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input_field">
+                                            <input type="number" asp-for="Offer.Time" placeholder="Tamamlama Gününüz...">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input_field">
+                                            <textarea asp-for="Offer.Description" cols="30" rows="10" placeholder="Açıklama Yazınız..."></textarea>
+                                        </div>
+                                        <center><small>* Lütfen Burada Doğru Değerler Girdiğinizden Emin Olun.</small></center>
+                                        <br />
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="submit_btn">
+                                            <button class="boxed-btn3 w-100" type="submit">Teklifi Yap</button>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="input_field">
-                                    <textarea name="#" id="" cols="30" rows="10" placeholder="Açıklama Yazınız..."></textarea>
-                                </div>
-                                <center><small>* Lütfen Burada Doğru Değerler Girdiğinizden Emin Olun.</small></center>
-                                <br />
-                            </div>
-                            <div class="col-md-12">
-                                <div class="submit_btn">
-                                    <button class="boxed-btn3 w-100" type="submit">Teklifi Yap</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                            </form>
+                        }
+
+                    }
+                    else
+                    {
+                        <h5>Giriş Yapılmamış</h5>
+                        <hr />
+                        <p>Teklif Verebilmek İçin Lütfen <a href="/Uye/YazilimciGiris/">Giriş Yapınız</a></p>
+                    }
                 </div>
             </div>
             <div class="col-lg-4">

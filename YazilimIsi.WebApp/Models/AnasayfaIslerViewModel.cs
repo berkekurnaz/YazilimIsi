@@ -12,6 +12,8 @@ namespace YazilimIsi.WebApp.Models
         public Offer Offer { get; set; }
         public List<Job> Jobs { get; set; }
         public Job Job { get; set; }
+        public Developer Developer { get; set; } // For Developer Login Check
+        public Offer DeveloperOffer { get; set; } // For Developer Offer Check
         public IPagingList MyPagingModel { get; set; }
     }
 }
