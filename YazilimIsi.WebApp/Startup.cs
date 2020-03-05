@@ -50,9 +50,17 @@ namespace YazilimIsi.WebApp
             app.UseSession();
             app.UseMvc(routes =>
             {
+
+                /* Anasayfa Yazilimci Profil Route */
+                routes.MapRoute(
+                    name: "yazilimci",
+                    template: "profil/{name}",
+                    defaults: new { controller = "Anasayfa", action = "Yazilimci" });
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Anasayfa}/{action=Index}/{id?}");
+
             });
             app.UseStaticFiles();
             app.UseStatusCodePages();

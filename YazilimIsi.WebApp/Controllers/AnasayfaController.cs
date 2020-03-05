@@ -231,5 +231,29 @@ namespace YazilimIsi.WebApp.Controllers
         }
 
 
+
+        /* **************************************************************************************************************** */
+
+
+        /* Yazilimci Herkese Acik Profil Sayfasi */
+        public IActionResult Yazilimci(string name)
+        {
+            Developer developer = _developerService.GetDeveloperByUsername(name);
+            if (developer == null)
+            {
+                return RedirectToAction("Hata");
+            }
+            return View(developer);
+        }
+
+        public IActionResult Isveren()
+        {
+            return View();
+        }
+
+
+
+
+
     }
 }

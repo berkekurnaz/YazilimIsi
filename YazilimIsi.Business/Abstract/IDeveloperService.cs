@@ -9,6 +9,7 @@ namespace YazilimIsi.Business.Abstract
     {
         List<Developer> GetAllDevelopers();
         Developer GetDeveloperById(int Id);
+        Developer GetDeveloperByUsername(string username);
         void Add(Developer developer);
         void Update(Developer developer);
         void Delete(Developer developer);

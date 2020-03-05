@@ -1,0 +1,350 @@
+﻿
+@model YazilimIsi.Entity.Models.Developer
+@{
+    ViewData["Title"] = "Yazilimci";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+@{
+    var portfolioList = Model.Portfolio.ToList();
+    var educationList = Model.Education.ToList();
+    var awardsList = Model.Award.ToList();
+
+    List<string> skillsList = new List<string>();
+    if (Model.DeveloperSkills.Length >= 1)
+    {
+        skillsList = Model.DeveloperSkills.Split(',').ToList();
+    }
+
+    List<string> areasList = new List<string>();
+    if (Model.DeveloperAreas.Length >= 1)
+    {
+        areasList = Model.DeveloperAreas.Split(',').ToList();
+    }
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>Yazılımcı Profili</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="row text-center">
+            <div class="col-md-4">
+
+                <!-- Yazilimci Profil Fotografi -->
+                <div class="card">
+                    <img class="card-img-top" src="~/ImagesDeveloper/@Model.Photo" alt="@Model.Username">
+                    <p class="genric-btn info-border" style="margin:10px;">Ad Soyad: @Model.Name @Model.Surname</p>
+                    <p class="genric-btn info-border" style="margin:10px;">Üyelik Tarihi: @Model.CreatedDate</p>
+                    <p class="genric-btn info-border" style="margin:10px;">Şehir: @Model.City</p>
+                </div>
+                <br />
+
+                <div class="card">
+                    <div class="card-header">
+                        İletişim Bilgileri
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group text-left">
+                            <li class="list-group-item">Ad Soyad : @Model.Name @Model.Surname</li>
+                            <li class="list-group-item">Mail : @Model.Mail</li>
+                            <li class="list-group-item">Şehir : @Model.City</li>
+                            <li class="list-group-item">Ülke : @Model.Country</li>
+                        </ul>
+                    </div>
+                </div>
+                <br />
+
+                <div class="card">
+                    <div class="card-header">
+                        Sosyal Medya
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group text-left">
+                            @if (Model.MediaGithub.Length > 3)
+                            {
+                                <li class="list-group-item">Github : <a style="border:1px solid black; padding:5px;border-radius:8px;" href="@Model.MediaGithub">Profil İncele</a></li>
+                            }
+                            @if (Model.MediaMedium.Length > 3)
+                            {
+                                <li class="list-group-item">Medium : <a style="border:1px solid black; padding:5px;border-radius:8px;" href="@Model.MediaMedium">Profil İncele</a></li>
+                            }
+                            @if (Model.MediaLinkedin.Length > 3)
+                            {
+                                <li class="list-group-item">Linkedin : <a style="border:1px solid black; padding:5px;border-radius:8px;" href="@Model.MediaLinkedin">Profil İncele</a></li>
+                            }
+                            @if (Model.MediaWebsite.Length > 3)
+                            {
+                                <li class="list-group-item">İnternet Sitesi : <a style="border:1px solid black; padding:5px;border-radius:8px;" href="@Model.MediaWebsite">Profil İncele</a></li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-8">
+
+                <div class="card">
+                    <div class="card-header">
+                        Yazılımcı Hakkında
+                    </div>
+                    <div class="card-body">
+                        @Model.Description
+                    </div>
+                </div>
+                <br />
+
+                <!-- Portfolyo Kart -->
+                <div class="card">
+                    <div class="card-header">
+                        Portfolyo
+                    </div>
+                    <div class="card-body">
+                        @if (portfolioList.Count > 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (var item in portfolioList)
+                                {
+                                    <li class="list-group-item"> <a style="cursor:pointer" onclick="showDetayPortfolyo('@item.ProjectName','@item.Description','@item.CreatedDate')"><b>Proje Adı: </b>@item.ProjectName</a></li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>Henüz Proje Eklenmemiş.</p>
+                        }
+                        <br />
+                    </div>
+                </div>
+                <br />
+
+                <!-- Eğitim Kart -->
+                <div class="card">
+                    <div class="card-header">
+                        Eğitim
+                    </div>
+                    <div class="card-body">
+                        @if (educationList.Count > 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (var item in educationList)
+                                {
+                                    <li class="list-group-item"><a style="cursor:pointer" onclick="showDetayEducation('@item.Title','@item.Description','@item.StartDate','@item.EndDate')"><b>Eğitim: </b>@item.Title <br /> <b>Başlangıç Tarihi: </b>@Convert.ToDateTime(item.StartDate).ToShortDateString() <b>Bitiş Tarihi: </b>@Convert.ToDateTime(item.EndDate).ToShortDateString()</a></li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>Henüz Eğitim Eklenmemiş.</p>
+                        }
+                    </div>
+                </div>
+                <br />
+
+                <!-- Ödüller Kart -->
+                <div class="card">
+                    <div class="card-header">
+                        Ödüller
+                    </div>
+                    <div class="card-body">
+                        @if (awardsList.Count > 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (var item in awardsList)
+                                {
+                                    <li class="list-group-item"><a style="cursor:pointer" onclick="showDetayPortfolyo('@item.Title','@item.Description','@item.Date')"><b>Ödül Başlığı: </b>@item.Title <br /><b>Ödül Verilme Tarihi:</b> @Convert.ToDateTime(item.Date).ToShortDateString()</a></li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>Henüz Ödül Eklenmemiş.</p>
+                        }
+                        <br />
+                    </div>
+                </div>
+                <br />
+
+                <!-- YETENEKLER -->
+                <div class="card">
+                    <div class="card-header">
+                        Yetenekler
+                    </div>
+                    <div class="card-body">
+
+                        @if (skillsList.Count > 0)
+                        {
+                            @foreach (var item in skillsList)
+                            {
+                                <button onclick="showModal2('@item')" style="border:1px solid #2c3e50;padding-left:6px;padding-right:6px;border-radius:5px;margin:3px;">@item</button>
+                            }
+                        }
+                        else
+                        {
+                            <p>Herhangi Bir Yetenek Eklenmemiş</p>
+                        }
+                    </div>
+                </div>
+                <br />
+
+                <!-- ILGILENDIGIN ALANLAR -->
+                <div class="card">
+                    <div class="card-header">
+                        İlgi Alanları
+                    </div>
+                    <div class="card-body">
+
+                        @if (areasList.Count > 0)
+                        {
+                            @foreach (var item in areasList)
+                            {
+                                <button style="border:1px solid #2c3e50;padding-left:6px;padding-right:6px;border-radius:5px;margin:3px;">@item</button>
+                            }
+                        }
+                        else
+                        {
+                            <p>Herhangi Bir Alan Eklenmemiş</p>
+                        }
+                    </div>
+                </div>
+                <br />
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->
+
+
+
+<!-- Detay Portfolyo Modal -->
+<div class="modal fade" id="modalDetayPortfolyo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Portfolyo Detayları</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form asp-controller="" asp-action="" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="p-1">Proje Adı</label>
+                            <input id="title" name="title" type="text" class="form-control" readonly /><br />
+
+                            <label class="p-1">Tarih</label>
+                            <input id="date" name="date" type="text" class="form-control" readonly /> <br />
+
+                            <label class="p-1">Açıklama</label>
+                            <textarea id="description" name="description" class="form-control" rows="5" readonly></textarea> <br />
+                        </div>
+                        <button type="button" class="genric-btn danger" data-dismiss="modal">Kapat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detay Education Modal -->
+<div class="modal fade" id="modalDetayEducation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eğitim Detayları</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form asp-controller="" asp-action="" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="p-1">Eğitim Başlık</label>
+                            <input id="title" name="title" type="text" class="form-control" readonly /><br />
+
+                            <label class="p-1">Başlangıç Tarihi</label>
+                            <input id="startDate" name="startDate" type="text" class="form-control" readonly /> <br />
+
+                            <label class="p-1">Bitiş Tarihi</label>
+                            <input id="endDate" name="endDate" type="text" class="form-control" readonly /> <br />
+
+                            <label class="p-1">Açıklama</label>
+                            <textarea id="description" name="description" class="form-control" rows="5" readonly></textarea> <br />
+                        </div>
+                        <button type="button" class="genric-btn danger" data-dismiss="modal">Kapat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detay Award Modal -->
+<div class="modal fade" id="modalDetayAward" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ödül Detayları</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form asp-controller="" asp-action="" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="p-1">Ödül Başlık</label>
+                            <input id="title" name="title" type="text" class="form-control" readonly /><br />
+
+                            <label class="p-1">Tarih</label>
+                            <input id="date" name="date" type="text" class="form-control" readonly /> <br />
+
+                            <label class="p-1">Açıklama</label>
+                            <textarea id="description" name="description" class="form-control" rows="5" readonly></textarea> <br />
+                        </div>
+                        <button type="button" class="genric-btn danger" data-dismiss="modal">Kapat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showDetayPortfolyo(title, description, date) {
+        $("#modalDetayPortfolyo #title").val(title);
+        $("#modalDetayPortfolyo #date").val(date);
+        $("#modalDetayPortfolyo #description").val(description);
+        $("#modalDetayPortfolyo").modal();
+    }
+    function showDetayEducation(title, description, startDate, endDate) {
+        $("#modalDetayEducation #title").val(title);
+        $("#modalDetayEducation #startDate").val(startDate);
+        $("#modalDetayEducation #endDate").val(endDate);
+        $("#modalDetayEducation #description").val(description);
+        $("#modalDetayEducation").modal();
+    }
+    function showDetayAward(title, description, date) {
+        $("#modalDetayAward #title").val(title);
+        $("#modalDetayAward #date").val(date);
+        $("#modalDetayAward #description").val(description);
+        $("#modalDetayAward").modal();
+    }
+</script>

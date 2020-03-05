@@ -77,6 +77,11 @@ namespace YazilimIsi.Business.Concrete
             return _developerDal.Get(x => x.Id == Id);
         }
 
+        public Developer GetDeveloperByUsername(string username)
+        {
+            return _developerDal.Get(x => x.Username == username, x=> x.Portfolio, x=>x.Education, x=>x.Award);
+        }
+
         /* Bir Yazilimci Guncelleme */
         public void Update(Developer developer)
         {
