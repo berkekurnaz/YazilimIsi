@@ -19,6 +19,7 @@ namespace YazilimIsi.WebApp.Controllers
         IContactService _contactService = new ContactManager(new EfContactDal());
         IJobService _jobService = new JobManager(new EfJobDal());
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
+        IUserService _userService = new UserManager(new EfUserDal());
         IOfferService _offerService = new OfferManager(new EfOfferDal());
 
         /* Anasayfa Index Sayfasi */
@@ -246,9 +247,16 @@ namespace YazilimIsi.WebApp.Controllers
             return View(developer);
         }
 
-        public IActionResult Isveren()
+        /* Isveren Herkese Acik Profil Sayfasi */
+        public IActionResult Isveren(string name)
         {
-            return View();
+            User user = _userService.GetUserByName(name);
+            if (user == null)
+            {
+                return RedirectToAction("Hata");
+            }
+            ViewBag.UserCreatedJobs = _jobService.GetJobsByUserId(user.Id);
+            return View(user);
         }
 
 

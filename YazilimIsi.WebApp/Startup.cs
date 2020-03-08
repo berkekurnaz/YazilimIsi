@@ -57,6 +57,12 @@ namespace YazilimIsi.WebApp
                     template: "profil/{name}",
                     defaults: new { controller = "Anasayfa", action = "Yazilimci" });
 
+                /* Anasayfa Isveren Profil Route */
+                routes.MapRoute(
+                    name: "isveren",
+                    template: "isveren/{name}",
+                    defaults: new { controller = "Anasayfa", action = "Isveren" });
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Anasayfa}/{action=Index}/{id?}");

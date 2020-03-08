@@ -8,7 +8,10 @@ namespace YazilimIsi.Business.Abstract
     public interface IUserService
     {
         List<User> GetAllUsers();
+
         User GetUserById(int Id);
+        User GetUserByName(string name);
+
         void Add(User user);
         void Update(User user);
         void Delete(User user);

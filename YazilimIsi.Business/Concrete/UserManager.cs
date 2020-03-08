@@ -41,6 +41,11 @@ namespace YazilimIsi.Business.Concrete
             return _userDal.Get(x => x.Id == Id);
         }
 
+        public User GetUserByName(string name)
+        {
+            return _userDal.Get(x => x.Username == name);
+        }
+
         /* Bir Kullanici Guncelleme */
         public void Update(User user)
         {

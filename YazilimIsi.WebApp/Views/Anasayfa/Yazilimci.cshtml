@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div classNedir="bradcam_text">
-                    <h3>Yazılımcı Profili</h3>
+                    <h3>Yazılımcı Profili : @Model.Name @Model.Surname</h3>
                 </div>
             </div>
         </div>
@@ -118,7 +118,7 @@
                             <ul class="list-group">
                                 @foreach (var item in portfolioList)
                                 {
-                                    <li class="list-group-item"> <a style="cursor:pointer" onclick="showDetayPortfolyo('@item.ProjectName','@item.Description','@item.CreatedDate')"><b>Proje Adı: </b>@item.ProjectName</a></li>
+                                    <li class="list-group-item"> <a style="cursor:pointer" onclick="showDetayPortfolyo('@item.ProjectName','@item.Description','@item.CreatedDate','@item.ProjectUrl')"><b>Proje Adı: </b>@item.ProjectName</a></li>
                                 }
                             </ul>
                         }
@@ -251,6 +251,9 @@
                             <label class="p-1">Tarih</label>
                             <input id="date" name="date" type="text" class="form-control" readonly /> <br />
 
+                            <label class="p-1">Proje Url</label>
+                            <input id="url" name="url" type="text" class="form-control" readonly /> <br />
+
                             <label class="p-1">Açıklama</label>
                             <textarea id="description" name="description" class="form-control" rows="5" readonly></textarea> <br />
                         </div>
@@ -328,9 +331,10 @@
 </div>
 
 <script>
-    function showDetayPortfolyo(title, description, date) {
+    function showDetayPortfolyo(title, description, date, url) {
         $("#modalDetayPortfolyo #title").val(title);
         $("#modalDetayPortfolyo #date").val(date);
+        $("#modalDetayPortfolyo #url").val(url);
         $("#modalDetayPortfolyo #description").val(description);
         $("#modalDetayPortfolyo").modal();
     }

@@ -1,0 +1,153 @@
+﻿@model YazilimIsi.Entity.Models.User
+@{
+    ViewData["Title"] = "Isveren";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div classNedir="bradcam_text">
+                    <h3>İşveren Profili : @Model.Name @Model.Surname</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+<!-- featured_candidates_area_start  -->
+<div class="featured_candidates_area candidate_page_padding">
+    <div class="container">
+
+        <div class="row text-center">
+            <div class="col-md-4">
+
+                <!-- Yazilimci Profil Fotografi -->
+                <div class="card">
+                    <img class="card-img-top" src="~/ImagesUser/@Model.Photo" alt="@Model.Username">
+                    <p class="genric-btn info-border" style="margin:10px;">Ad Soyad: @Model.Name @Model.Surname</p>
+                    <p class="genric-btn info-border" style="margin:10px;">Üyelik Tarihi: @Model.CreatedDate</p>
+                    <p class="genric-btn info-border" style="margin:10px;">Şehir: @Model.City</p>
+                </div>
+                <br />
+
+                <div class="card">
+                    <div class="card-header">
+                        İletişim Bilgileri
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group text-left">
+                            <li class="list-group-item">Ad Soyad : @Model.Name @Model.Surname</li>
+                            <li class="list-group-item">Mail : @Model.Mail</li>
+                            <li class="list-group-item">Şehir : @Model.City</li>
+                            <li class="list-group-item">Ülke : @Model.Country</li>
+                        </ul>
+                    </div>
+                </div>
+                <br />
+
+            </div>
+            <div class="col-md-8">
+
+                <div class="card">
+                    <div class="card-header">
+                        İşveren Hakkında
+                    </div>
+                    <div class="card-body">
+                        @Model.Description
+                    </div>
+                </div>
+                <br />
+
+                <!-- ISVEREN ISLER -->
+                <div class="card">
+                    <div class="card-header">
+                        Oluşturduğu İşler
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.UserCreatedJobs.Count > 0)
+                        {
+                            <ul class="list-group">
+                                @foreach (var item in ViewBag.UserCreatedJobs)
+                                {
+                                    <li class="list-group-item"> <a style="cursor:pointer" onclick="showDetayPortfolyo('@item.Title','@item.CreatedDate','@item.Price','@item.Time','@item.Category','@item.Id')"><b>Proje Adı: </b>@item.Title</a></li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>Henüz Proje Eklenmemiş.</p>
+                        }
+                        <br />
+                    </div>
+                </div>
+                <br />
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- featured_candidates_area_end  -->
+
+
+
+<!-- Detay Portfolyo Modal -->
+<div class="modal fade" id="modalDetayPortfolyo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Portfolyo Detayları</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form asp-controller="" asp-action="" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="p-1">İş Adı</label>
+                            <input id="title" name="title" type="text" class="form-control" readonly /><br />
+
+                            <label class="p-1">Oluşturulma Tarihi</label>
+                            <input id="createdDate" name="createdDate" type="text" class="form-control" readonly /> <br />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="p-1">Fiyat</label>
+                                    <input id="price" name="price" type="text" class="form-control" readonly />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="p-1">Zaman</label>
+                                    <input id="time" name="time" type="text" class="form-control" readonly />
+                                </div>
+                            </div> <br />
+
+                            <label class="p-1">Kategori</label>
+                            <input id="category" name="category" type="text" class="form-control" readonly /> <br />
+                        </div>
+
+                        <a id="id" name="id" class="genric-btn info">Sayfayı İncele</a>
+                        <button type="button" class="genric-btn danger" data-dismiss="modal">Kapat</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function showDetayPortfolyo(title, createdDate, price, time, category, id) {
+        $("#modalDetayPortfolyo #title").val(title);
+        $("#modalDetayPortfolyo #createdDate").val(createdDate);
+        $("#modalDetayPortfolyo #price").val(price);
+        $("#modalDetayPortfolyo #time").val(time);
+        $("#modalDetayPortfolyo #category").val(category);
+        document.getElementById("id").href = "/Anasayfa/IsDetay/" + id;
+        $("#modalDetayPortfolyo").modal();
+    }
+</script>
+
