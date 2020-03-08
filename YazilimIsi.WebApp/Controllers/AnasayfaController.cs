@@ -77,7 +77,7 @@ namespace YazilimIsi.WebApp.Controllers
 
 
         /* Anasayfa Yazilim Isleri Sayfasi */
-        public IActionResult Isler(int sayfa=1, [FromQuery] string sehir = null, [FromQuery] string anahtar = null, [FromQuery] string kategori = null, [FromQuery] string type = null)
+        public IActionResult Isler(int sayfa=1, [FromQuery] string sehir = null, [FromQuery] string anahtar = null, [FromQuery] string kategori = null, [FromQuery] string type = null, [FromQuery] string minPrice = null, [FromQuery] string maxPrice = null, [FromQuery] string minTime = null, [FromQuery] string maxTime = null)
         {
             List<Job> jobs = _jobService.GetAllJobs();
             AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
@@ -103,6 +103,18 @@ namespace YazilimIsi.WebApp.Controllers
                     jobs = jobs.Where(x => x.Category == kategori).ToList();
                 }
             }
+            if (minTime != null && maxTime != null)
+            {
+                ViewBag.JobSearchMinTime = minTime;
+                ViewBag.JobSearchMaxTime = maxTime;
+                jobs = jobs.Where(x => x.Time >= Convert.ToInt32(minTime) && x.Time <= Convert.ToInt32(maxTime)).ToList();
+            }
+            if (minPrice != null && maxPrice != null)
+            {
+                ViewBag.JobSearchMinPrice = minPrice;
+                ViewBag.JobSearchMaxPrice = maxPrice;
+                jobs = jobs.Where(x => x.Price >= Convert.ToInt32(minPrice) && x.Price <= Convert.ToInt32(maxPrice)).ToList();
+            }
 
 
             anasayfaIslerViewModel.Jobs = PagingList.Create(jobs, 10, sayfa);
@@ -112,7 +124,7 @@ namespace YazilimIsi.WebApp.Controllers
             return View(anasayfaIslerViewModel);
         }
         [HttpPost]
-        public IActionResult Isler(int sayfa = 1, string city = null, string key =null, string category=null)
+        public IActionResult Isler(int sayfa = 1, string city = null, string key =null, string category=null, string minPrice = null, string maxPrice = null, string minTime = null, string maxTime = null)
         {
             List<Job> jobs = _jobService.GetAllJobs();
             if (key != null)
@@ -135,6 +147,24 @@ namespace YazilimIsi.WebApp.Controllers
                 {
                     ViewBag.JobSearchCategory = category;
                     jobs = jobs.Where(x => x.Category == category).ToList();
+                }
+            }
+            if (minTime != null && maxTime != null)
+            {
+                if (minTime != "0")
+                {
+                    ViewBag.JobSearchMinTime = minTime;
+                    ViewBag.JobSearchMaxTime = maxTime;
+                    jobs = jobs.Where(x => x.Time >= Convert.ToInt32(minTime) && x.Time <= Convert.ToInt32(maxTime)).ToList();
+                }
+            }
+            if (minPrice != null && maxPrice != null)
+            {
+                if(minPrice != "0")
+                {
+                    ViewBag.JobSearchMinPrice = minPrice;
+                    ViewBag.JobSearchMaxPrice = maxPrice;
+                    jobs = jobs.Where(x => x.Price >= Convert.ToInt32(minPrice) && x.Price <= Convert.ToInt32(maxPrice)).ToList();
                 }
             }
             AnasayfaIslerViewModel anasayfaIslerViewModel = new AnasayfaIslerViewModel();
@@ -236,6 +266,7 @@ namespace YazilimIsi.WebApp.Controllers
         /* **************************************************************************************************************** */
 
 
+
         /* Yazilimci Herkese Acik Profil Sayfasi */
         public IActionResult Yazilimci(string name)
         {
@@ -260,6 +291,24 @@ namespace YazilimIsi.WebApp.Controllers
         }
 
 
+
+        /* **************************************************************************************************************** */
+
+
+
+        /* Blog Sayfasi */
+        public IActionResult Blog(string category)
+        {
+            // BU KISMI YAP...
+            return View();
+        }
+
+        /* Blog Sayfasi Detay */
+        public IActionResult BlogDetay(int Id)
+        {
+            // BU KISMI YAP...
+            return View();
+        }
 
 
 

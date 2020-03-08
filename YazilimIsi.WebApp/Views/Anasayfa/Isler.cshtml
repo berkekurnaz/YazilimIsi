@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <div classNedir="bradcam_text">
-                    <h3>158 Yazılım İşi Bekliyor  @ViewBag.tes01</h3>
+                    <h3>158 Yazılım İşi Bekliyor </h3>
                 </div>
             </div>
         </div>
@@ -39,9 +39,9 @@
                                     <div class="single_field">
                                         <select id="city" name="city" class="wide" style="display: none;">
                                             @if (ViewBag.JobSearchCity != null)
-	                                        {
+                                            {
                                                 <option>@ViewBag.JobSearchCity</option>
-	                                        }
+                                            }
                                             <option>Bütün Konumlar</option>
                                             <option>İstanbul</option>
                                             <option>Balıkesir</option>
@@ -70,27 +70,33 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="range_wrap">
-                                        <label for="amount">Zaman Aralığı:</label>
+                                        <label for="time">Zaman Aralığı:</label>
                                         <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
                                             <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
                                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
                                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
                                         </div>
                                         <p>
-                                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                                            <input type="text" id="time" name="time" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;"><br />
+                                            <input type="number" id="minTime" name="minTime" value="@ViewBag.JobSearchMinTime" style="display:none;" />
+                                            <input type="number" id="maxTime" name="maxTime" value="@ViewBag.JobSearchMaxTime" style="display:none;" />
+                                            <small>* Gün Hesabı</small>
                                         </p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="range_wrap">
                                         <label for="amount">Fiyat Aralığı:</label>
-                                        <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                        <div id="slider-range-2" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
                                             <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 3.04878%; width: 96.9512%;"></div>
                                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 3.04878%;"></span>
                                             <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 100%;"></span>
                                         </div>
                                         <p>
-                                            <input type="text" id="amount" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;">
+                                            <input type="text" id="price" name="price" readonly="" style="border:0; color:#7A838B; font-size: 14px; font-weight:400;"><br />
+                                            <input type="number" id="minPrice" name="minPrice" value="@ViewBag.JobSearchMinPrice" style="display:none;" />
+                                            <input type="number" id="maxPrice" name="maxPrice" value="@ViewBag.JobSearchMaxPrice" style="display:none;" />
+                                            <small>* TL Cinsinden</small>
                                         </p>
                                     </div>
                                 </div>
@@ -181,10 +187,16 @@
                         <div class="col-lg-12">
                             <div class="pagination_wrap">
                                 <ul>
-                                    @{ 
+                                    @{
                                         string anahtar = "";
                                         string sehir = "";
                                         string kategori = "";
+
+                                        string minPrice = "1";
+                                        string maxPrice = "50000";
+                                        string minTime = "1";
+                                        string maxTime = "365";
+
                                         if (ViewBag.JobSearchKey != null)
                                         {
                                             anahtar = ViewBag.JobSearchKey;
@@ -197,13 +209,30 @@
                                         {
                                             kategori = ViewBag.JobSearchCategory;
                                         }
+
+                                        if (ViewBag.JobSearchMinTime != null)
+                                        {
+                                            minTime = ViewBag.JobSearchMinTime;
+                                        }
+                                        if (ViewBag.JobSearchMaxTime != null)
+                                        {
+                                            maxTime = ViewBag.JobSearchMaxTime;
+                                        }
+                                        if (ViewBag.JobSearchMinPrice != null)
+                                        {
+                                            minPrice = ViewBag.JobSearchMinPrice;
+                                        }
+                                        if (ViewBag.JobSearchMaxPrice != null)
+                                        {
+                                            maxPrice = ViewBag.JobSearchMaxPrice;
+                                        }
                                     }
-                                    <li><a href="@Url.Action("Isler", new { sayfa = Model.MyPagingModel.PageIndex - 1, sehir = sehir, anahtar=anahtar, kategori = kategori })"> <i class="ti-angle-left"></i> </a></li>
+                                    <li><a href="@Url.Action("Isler", new { sayfa = Model.MyPagingModel.PageIndex - 1, sehir = sehir, anahtar=anahtar, kategori = kategori, minTime=minTime, maxTime = maxTime, minPrice = minPrice, maxPrice = maxPrice })"> <i class="ti-angle-left"></i> </a></li>
                                     @for (var p = 1; p <= Model.MyPagingModel.PageCount; p++)
-                                    {                          
-                                        <li><a href="@Url.Action("Isler", new { sayfa = p, sehir = sehir, anahtar=anahtar, kategori = kategori })"><span>@p</span></a></li>
+                                    {
+                                        <li><a href="@Url.Action("Isler", new { sayfa = p, sehir = sehir, anahtar=anahtar, kategori = kategori, minTime=minTime, maxTime = maxTime, minPrice = minPrice, maxPrice = maxPrice })"><span>@p</span></a></li>
                                     }
-                                    <li><a href="@Url.Action("Isler", new { sayfa = Model.MyPagingModel.PageIndex + 1, sehir = sehir, anahtar=anahtar, kategori = kategori })"> <i class="ti-angle-right"></i> </a></li>
+                                    <li><a href="@Url.Action("Isler", new { sayfa = Model.MyPagingModel.PageIndex + 1, sehir = sehir, anahtar=anahtar, kategori = kategori, minTime=minTime, maxTime = maxTime, minPrice = minPrice, maxPrice = maxPrice })"> <i class="ti-angle-right"></i> </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -213,3 +242,82 @@
         </div>
     </div>
 </div>
+
+<script src="~/js/vendor/jquery-1.12.4.min.js"></script>
+<script>
+    $(function () {
+        var hasMinTime = @minTime != null;
+        var hasMaxTime = @maxTime != null;
+
+        if (hasMinTime)
+        {     
+            $("#minTime").val(@minTime);
+        }
+        else
+        {
+            $("#minTime").val("0");
+        }
+
+        if (hasMaxTime)
+        {     
+            $("#maxTime").val(@maxTime);
+        }
+        else
+        {
+            $("#maxTime").val("365");
+        }
+
+        $("#slider-range").slider({
+            range: true,
+            min: 1,
+            max: 365,
+            values: [@minTime, @maxTime],
+            slide: function (event, ui) {
+                $("#time").val(ui.values[0] + " - " + ui.values[1] + "/ Gün");
+                $("#minTime").val(ui.values[0]);
+                $("#maxTime").val(ui.values[1]);
+            }
+        });
+        $("#time").val($("#slider-range").slider("values", 0) +
+            " - " + $("#slider-range").slider("values", 1) + "/ Gün");
+    });
+</script>
+<script>
+    $(function () {
+
+        var hasMinPrice = @minPrice != null;
+        var hasMaxPrice = @maxPrice != null;
+
+        if (hasMinPrice)
+        {     
+            $("#minPrice").val(@minPrice);
+        }
+        else
+        {
+            $("#minPrice").val("0");
+        }
+
+        if (hasMaxPrice)
+        {     
+            $("#maxPrice").val(@maxPrice);
+        }
+        else
+        {
+            $("#maxPrice").val("50000");
+        }
+
+        $("#slider-range-2").slider({
+            range: true,
+            min: 1,
+            max: 50000,
+            values: [@minPrice, @maxPrice],
+            slide: function (event, ui) {
+                $("#price").val(ui.values[0] + " - " + ui.values[1] + "/ TL");
+                $("#minPrice").val(ui.values[0]);
+                $("#maxPrice").val(ui.values[1]);
+            }
+        });
+        $("#price").val($("#slider-range-2").slider("values", 0) +
+            " - " + $("#slider-range-2").slider("values", 1) + "/ TL");
+    });
+</script>
