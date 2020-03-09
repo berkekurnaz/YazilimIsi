@@ -21,6 +21,7 @@ namespace YazilimIsi.WebApp.Controllers
         IDeveloperService _developerService = new DeveloperManager(new EfDeveloperDal());
         IUserService _userService = new UserManager(new EfUserDal());
         IOfferService _offerService = new OfferManager(new EfOfferDal());
+        IBlogService _blogService = new BlogManager(new EfBlogDal());
 
         /* Anasayfa Index Sayfasi */
         public IActionResult Index()
@@ -55,13 +56,13 @@ namespace YazilimIsi.WebApp.Controllers
         /* Anasayfa YazilimBlog Sayfasi */
         public IActionResult YazilimBlog()
         {
-            return View();
+            return View(_blogService.GetAllBlogArticlesByCategory("Yazilim"));
         }
 
         /* Anasayfa IsVerenBlog Sayfasi */
         public IActionResult IsVerenBlog()
         {
-            return View();
+            return View(_blogService.GetAllBlogArticlesByCategory("Isveren"));
         }
 
         /* Anasayfa Iletisim Sayfasi */
